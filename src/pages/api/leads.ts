@@ -1,5 +1,4 @@
 import type { APIRoute } from "astro";
-import { env } from "cloudflare:workers";
 import type { LeadResponse } from "@/features/lead/lead-contract";
 import { parseLeadRequest } from "@/server/lead-request";
 import { sendTelegramLead } from "@/server/telegram";
@@ -28,7 +27,7 @@ export const POST: APIRoute = async ({ request }) => {
       }, parsed.status);
     }
 
-    const { TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TURNSTILE_SECRET_KEY } = env;
+    const { TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TURNSTILE_SECRET_KEY } = process.env;
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || !TURNSTILE_SECRET_KEY) {
       console.error(JSON.stringify({ message: "lead endpoint is missing required secrets" }));
       return json({ ok: false, code: "SERVER_MISCONFIGURED", message: "Сервис временно не настроен." }, 500);

@@ -1,4 +1,4 @@
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel";
 import { defineConfig } from "astro/config";
 
 const site = process.env.PUBLIC_SITE_URL || "https://example.com";
@@ -6,7 +6,7 @@ const site = process.env.PUBLIC_SITE_URL || "https://example.com";
 export default defineConfig({
   site,
   output: "static",
-  adapter: cloudflare({ imageService: "passthrough" }),
+  adapter: vercel(),
   build: {
     assets: "assets"
   },
