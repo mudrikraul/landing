@@ -17,6 +17,10 @@ const { program } = Astro.props;
 const resultTitle = program.resultTitle ?? "\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442:";
 const { label: bonusLabel, text: bonusText } = splitBonusText(program.bonus);
 const isStrength = program.variant === "strength";
+const hasDesktopBackground = Boolean(program.desktopBackgroundImage);
+const sectionStyle = hasDesktopBackground
+  ? `--program-desktop-background: url("${program.desktopBackgroundImage}")`
+  : undefined;
 const imageDimensions: Record<Program["variant"], { width: number; height: number }> = {
   compass: { width: 1100, height: 1300 },
   productivity: { width: 1100, height: 1300 },
@@ -30,7 +34,12 @@ const imageAlt = program.variant === "rejuvenation"
   : program.title;
 ---
 
-<section class:list={["program", `program--${program.theme}`, `program--${program.variant}`]} id={program.id} data-scroll-section>
+<section
+  class:list={["program", `program--${program.theme}`, `program--${program.variant}`]}
+  id={program.id}
+  data-scroll-section
+  style={sectionStyle}
+>
   <div class="section__inner">
     <div class="program__shell">
       <div class="program__content">
@@ -95,7 +104,9 @@ const imageAlt = program.variant === "rejuvenation"
         </div>
       </div>
       <div class="program__media">
-        <img src={program.image} width={imageWidth} height={imageHeight} alt={imageAlt} loading="lazy" decoding="async" />
+        {!hasDesktopBackground && (
+          <img src={program.image} width={imageWidth} height={imageHeight} alt={imageAlt} loading="lazy" decoding="async" />
+        )}
       </div>
     </div>
   </div>

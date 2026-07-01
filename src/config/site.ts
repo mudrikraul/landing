@@ -15,9 +15,9 @@ export const siteConfig = {
   methodImage:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399347/whatIDo_chfgaa.png",
   aboutImage:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=80",
+    "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/About_sjmjbt.png",
   contactsImage:
-    "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399349/hero_ocbvjl.png"
+    "https://res.cloudinary.com/dohehigsm/image/upload/v1782914353/Contacts_wloedk.png"
 } as const;
 
 export function getSiteUrl(): URL {

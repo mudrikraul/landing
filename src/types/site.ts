@@ -54,6 +54,7 @@ export interface Program {
   duration: string;
   price: string;
   image: string;
+  desktopBackgroundImage?: string;
 }
 
 export interface Certificate {
@@ -65,4 +66,3 @@ export interface TrustBenefit {
   title: string;
   text: string;
 }
-

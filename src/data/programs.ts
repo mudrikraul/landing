@@ -55,7 +55,8 @@ export const programs: readonly Program[] = [
     result: "Прилив сил, спокойствие, собранность, устойчивое восприятие действительности. Жизнь Здесь и Сейчас.",
     duration: "Продолжительность одной сессии: 120 минут",
     price: "Курс: 8 сессий",
-    image: "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399345/balans_ngmnzy.webp"
+    image: "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399345/balans_ngmnzy.webp",
+    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/7_e2qd0q.png"
   },
   {
     id: "strength",
@@ -75,7 +76,8 @@ export const programs: readonly Program[] = [
     result: "Внутренняя сила, уверенность и ощущение «я могу всё».",
     duration: "Продолжительность одной сессии: 120 минут",
     price: "Курс: 12 сессий",
-    image: "https://res.cloudinary.com/dohehigsm/image/upload/v1777399348/system_p2gwdk.png"
+    image: "https://res.cloudinary.com/dohehigsm/image/upload/v1777399348/system_p2gwdk.png",
+    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1782914353/Frame_6121_hkki13.png"
   },
   {
     id: "rejuvenation",
@@ -94,6 +96,7 @@ export const programs: readonly Program[] = [
     result: "Омоложение, свежесть, прилив энергии, обновленное состояние и ощущение целостности.",
     duration: "Продолжительность одной сессии: 120 минут",
     price: "Курс: 16 сессий",
-    image: "https://res.cloudinary.com/dohehigsm/image/upload/v1777399348/orga_r5jcns.png"
+    image: "https://res.cloudinary.com/dohehigsm/image/upload/v1777399348/orga_r5jcns.png",
+    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/8_zk406g.png"
   }
 ];
