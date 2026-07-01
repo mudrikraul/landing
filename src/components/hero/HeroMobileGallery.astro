@@ -1,0 +1,210 @@
+---
+import { galleryItems } from "@/data/gallery";
+---
+
+<div class="hero-mobile-gallery" aria-label="Mobile gallery">
+  <div class="hero-mobile-gallery__track" id="heroMobileGalleryTrack">
+    {
+      galleryItems.map((item) => (
+        <article class="hero-mobile-gallery__card">
+          <button
+            type="button"
+            class="hero-mobile-gallery__button"
+            data-media-trigger
+            data-media-type={item.type}
+            data-media-url={item.mediaUrl}
+            data-media-title={item.title}
+            aria-label={`Open: ${item.title}`}
+          >
+            <span class="hero-mobile-gallery__media">
+              <img src={item.previewUrl} width="720" height="480" alt={item.title} loading="lazy" decoding="async" />
+            </span>
+            <span class="hero-mobile-gallery__text">{item.caption}</span>
+          </button>
+        </article>
+      ))
+    }
+  </div>
+  <div class="hero-mobile-gallery__controls">
+    <button type="button" class="hero-mobile-gallery__control" id="heroMobileGalleryPrev" aria-label="Previous card">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path
+          d="M13.7235 7.05713L5.72353 15.0571C5.20283 15.5778 5.20283 16.422 5.72353 16.9427L13.7235 24.9427L15.6092 23.0571L9.88529 17.3333H26.6663V14.6666H9.88529L15.6092 8.94275L13.7235 7.05713Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+    <button type="button" class="hero-mobile-gallery__control" id="heroMobileGalleryNext" aria-label="Next card">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path
+          d="M18.2765 7.05713L26.2765 15.0571C26.7972 15.5778 26.7972 16.422 26.2765 16.9427L18.2765 24.9427L16.3908 23.0571L22.1147 17.3333H5.33366V14.6666H22.1147L16.3908 8.94275L18.2765 7.05713Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .hero-mobile-gallery {
+    display: none;
+  }
+
+  .hero-mobile-gallery__track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .hero-mobile-gallery__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-mobile-gallery__card {
+    flex: 0 0 240px;
+    min-width: 240px;
+    scroll-snap-align: start;
+  }
+
+  .hero-mobile-gallery__button {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .hero-mobile-gallery__media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-mobile-gallery__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-mobile-gallery__button:hover .hero-mobile-gallery__media img {
+    transform: scale(1.03);
+  }
+
+  .hero-mobile-gallery__text {
+    min-height: 112px;
+    color: var(--color-white);
+    font-size: 24px;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-mobile-gallery__text:empty {
+    display: none;
+  }
+
+  .hero-mobile-gallery__controls {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 34px;
+  }
+
+  .hero-mobile-gallery__control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    color: #a8a4a4;
+    cursor: pointer;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .hero-mobile-gallery__control:hover,
+  .hero-mobile-gallery__control:active {
+    color: var(--color-white);
+  }
+
+  .hero-mobile-gallery__control svg {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-mobile-gallery {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-top: 48px;
+    }
+
+    .hero-mobile-gallery__track {
+      margin: 0 -32px;
+      padding: 0 32px;
+      scroll-padding: 0 32px;
+    }
+
+    .hero-mobile-gallery__card {
+      flex-basis: 320px;
+      min-width: 320px;
+    }
+
+    .hero-mobile-gallery__text {
+      min-height: 132px;
+      font-size: 24px;
+      line-height: 1.28;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-mobile-gallery {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-top: 42px;
+    }
+
+    .hero-mobile-gallery__track {
+      padding: 0 24px;
+      scroll-padding: 0 24px;
+    }
+
+    .hero-mobile-gallery__card {
+      flex-basis: 240px;
+      min-width: 240px;
+    }
+
+    .hero-mobile-gallery__text {
+      min-height: 150px;
+      font-size: 23px;
+      line-height: 1.3;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .hero-mobile-gallery__card {
+      flex-basis: min(240px, calc(100vw - 72px));
+      min-width: min(240px, calc(100vw - 72px));
+    }
+
+    .hero-mobile-gallery__text {
+      min-height: 126px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0;
+    }
+  }
+</style>

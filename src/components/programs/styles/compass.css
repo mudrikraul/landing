@@ -1,0 +1,397 @@
+.program--compass {
+    --compass-background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTQ0MCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBmaWx0ZXI9InVybCgjZmlsdGVyMF9uXzkwXzI5MikiPgo8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfOTBfMjkyKSIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX25fOTBfMjkyIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSIxMDI0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+CjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIxIDEiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIG51bU9jdGF2ZXM9IjMiIHJlc3VsdD0ibm9pc2UiIHNlZWQ9IjQwODUiIC8+CjxmZUNvbG9yTWF0cml4IGluPSJub2lzZSIgdHlwZT0ibHVtaW5hbmNlVG9BbHBoYSIgcmVzdWx0PSJhbHBoYU5vaXNlIiAvPgo8ZmVDb21wb25lbnRUcmFuc2ZlciBpbj0iYWxwaGFOb2lzZSIgcmVzdWx0PSJjb2xvcmVkTm9pc2UxIj4KPGZlRnVuY0EgdHlwZT0iZGlzY3JldGUiIHRhYmxlVmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwICIvPgo8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluMj0ic2hhcGUiIGluPSJjb2xvcmVkTm9pc2UxIiByZXN1bHQ9Im5vaXNlMUNsaXBwZWQiIC8+CjxmZUZsb29kIGZsb29kLWNvbG9yPSJyZ2JhKDAsIDAsIDAsIDAuMTQpIiByZXN1bHQ9ImNvbG9yMUZsb29kIiAvPgo8ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9Im5vaXNlMUNsaXBwZWQiIGluPSJjb2xvcjFGbG9vZCIgcmVzdWx0PSJjb2xvcjEiIC8+CjxmZU1lcmdlIHJlc3VsdD0iZWZmZWN0MV9ub2lzZV85MF8yOTIiPgo8ZmVNZXJnZU5vZGUgaW49InNoYXBlIiAvPgo8ZmVNZXJnZU5vZGUgaW49ImNvbG9yMSIgLz4KPC9mZU1lcmdlPgo8L2ZpbHRlcj4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzkwXzI5MiIgeDE9IjcyMCIgeTE9IjAiIHgyPSI3MjAiIHkyPSIxMDI0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNEMkQwRDMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQjhCM0JCIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==");
+    --compass-noise-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
+    --compass-mobile-background-image: url("https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1780153184/compas_lrakf4.png");
+    position: relative;
+    min-height: max(100svh, 920px);
+    padding: 0;
+    overflow: hidden;
+    background-color: #d2d0d3;
+    background-image:
+      var(--compass-noise-image),
+      var(--compass-background-image),
+      linear-gradient(180deg, #d2d0d3 0%, #b8b3bb 100%);
+    background-position: 0 0, center, center;
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-size: 160px 160px, cover, cover;
+    color: #080808;
+    isolation: isolate;
+  }
+
+  .program--compass::before {
+    content: "";
+    position: absolute;
+    top: clamp(180px, 14.93vw, 260px);
+    left: clamp(460px, 45.56vw, 860px);
+    z-index: 0;
+    width: clamp(720px, 55.56vw, 920px);
+    height: clamp(720px, 55.56vw, 920px);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+
+  .program--compass .section__inner {
+    max-width: none;
+    min-height: max(100svh, 920px);
+    padding: 0;
+  }
+
+  .program--compass .program__shell {
+    position: relative;
+    display: block;
+    min-height: max(100svh, 920px);
+    overflow: hidden;
+    border-radius: 0;
+    background: transparent;
+    isolation: isolate;
+    z-index: 1;
+  }
+
+  .program--compass .program__shell::before,
+  .program--compass .program__shell::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+
+  .program--compass .program__shell::before {
+    top: clamp(96px, 8.19vw, 160px);
+    left: clamp(220px, 21.25vw, 560px);
+    width: max(1500px, 104.17vw);
+    height: max(1500px, 104.17vw);
+  }
+
+  .program--compass .program__shell::after {
+    top: clamp(-190px, -9.17vw, -72px);
+    left: clamp(0px, 3.89vw, 220px);
+    width: max(2000px, 138.89vw);
+    height: max(2000px, 138.89vw);
+  }
+
+  .program--compass .program__content {
+    position: absolute;
+    top: clamp(88px, 11.5vh, 150px);
+    left: clamp(40px, 4.9vw, 70px);
+    z-index: 3;
+    display: block;
+    width: min(522px, 42vw);
+    padding: 0;
+  }
+
+  .program--compass .program__content::before {
+    display: none;
+  }
+
+  .program--compass .program__stack {
+    max-width: none;
+  }
+
+  .program--compass .program__title {
+    margin: 0 0 28px;
+    color: #082439;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 62px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .program--compass .program__subtitle {
+    margin: 0 0 14px;
+    color: var(--color-accent);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .program--compass .program__intro,
+  .program--compass .program__item,
+  .program--compass .program__result p {
+    color: #080808;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  .program--compass .program__intro {
+    margin: 0 0 24px;
+  }
+
+  .program--compass .program__list-title {
+    margin: 0 0 16px;
+    color: currentColor;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+  }
+
+  .program--compass .program__list {
+    margin: 0;
+    gap: 20px;
+  }
+
+  .program--compass .program__item {
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .program--compass .program__item::before {
+    display: none;
+  }
+
+  .program--compass .program__item-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(246, 244, 240, 0.8);
+    color: #082439;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .program--compass .program__result {
+    margin-top: 24px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .program--compass .program__result h3 {
+    margin: 0 0 14px;
+    color: #080808;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    text-transform: uppercase;
+  }
+
+  .program--compass .program__result p {
+    margin: 0;
+  }
+
+  .program--compass .program__meta {
+    display: block;
+    margin-top: 32px;
+    padding-top: 0;
+  }
+
+  .program--compass .program-meta__value {
+    color: #080808;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: 0;
+  }
+
+  .program--compass .program-meta__caption {
+    margin-top: 8px;
+    color: rgba(8, 8, 8, 0.46);
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .program--compass .program__media {
+    position: absolute;
+    top: clamp(0px, 4.8vh, 58px);
+    right: clamp(-72px, -1.6vw, -18px);
+    bottom: 0;
+    z-index: 2;
+    width: clamp(720px, 58vw, 1040px);
+    min-height: 0;
+  }
+
+  .program--compass .program__media img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+@media (min-width: 1025px) and (max-width: 1279px) {
+        .program--compass,
+        .program--compass .section__inner,
+        .program--compass .program__shell {
+          min-height: max(100svh, 800px);
+        }
+
+        .program--compass .program__shell::before {
+          top: 96px;
+          left: clamp(220px, 20.54vw, 306px);
+          width: 1500px;
+          height: 1500px;
+        }
+
+        .program--compass .program__shell::after {
+          top: -132px;
+          left: clamp(24px, 3.76vw, 56px);
+          width: 2000px;
+          height: 2000px;
+        }
+
+        .program--compass .program__content {
+          top: clamp(76px, 10.5vh, 104px);
+          left: clamp(40px, 5.4vw, 64px);
+          width: min(492px, 43vw);
+        }
+
+        .program--compass .program__title {
+          font-size: clamp(42px, 4.15vw, 52px);
+          line-height: 1.1;
+        }
+
+        .program--compass .program__media {
+          top: clamp(0px, 3.8vh, 36px);
+          right: clamp(-116px, -6vw, -72px);
+          width: clamp(760px, 68vw, 880px);
+        }
+  }
+@media (max-width: 1024px) {
+        .program--compass {
+          min-height: auto;
+          padding: 28px;
+          background: var(--color-black);
+        }
+
+        .program--compass::before {
+          display: none;
+        }
+
+        .program--compass .section__inner {
+          max-width: 430px;
+          min-height: auto;
+          padding: 0;
+        }
+
+        .program--compass .program__shell {
+          min-height: auto;
+          padding: 28px 20px;
+          border-radius: 24px;
+          background: var(--compass-mobile-background-image) center / cover no-repeat;
+        }
+
+        .program--compass .program__shell::before,
+        .program--compass .program__shell::after {
+          display: none;
+        }
+
+        .program--compass .program__content {
+          position: relative;
+          top: auto;
+          left: auto;
+          z-index: 1;
+          width: 100%;
+          min-height: auto;
+          padding: 0;
+          background: transparent;
+        }
+
+        .program--compass .program__title {
+          max-width: 260px;
+          margin-bottom: 16px;
+          color: #000000;
+          font-family: var(--font-display);
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 36px;
+          letter-spacing: -0.3px;
+          white-space: normal;
+        }
+
+        .program--compass .program__subtitle {
+          margin-bottom: 16px;
+          color: #d25d14;
+          font-size: 14px;
+          line-height: 22px;
+        }
+
+        .program--compass .program__intro,
+        .program--compass .program__item,
+        .program--compass .program__result p {
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .program--compass .program__intro {
+          margin-bottom: 16px;
+        }
+
+        .program--compass .program__list-title {
+          margin-bottom: 16px;
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .program--compass .program__list {
+          gap: 16px;
+        }
+
+        .program--compass .program__item {
+          grid-template-columns: 32px 1fr;
+          gap: 20px;
+        }
+
+        .program--compass .program__item-index {
+          width: 32px;
+          height: 32px;
+          padding: 4px;
+          font-size: 14px;
+          line-height: 24px;
+        }
+
+        .program--compass .program__result {
+          margin-top: 16px;
+        }
+
+        .program--compass .program__result h3 {
+          margin-bottom: 16px;
+          color: #d25d14;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 22px;
+        }
+
+        .program--compass .program__meta {
+          margin-top: 16px;
+          padding-top: 0;
+        }
+
+        .program--compass .program-meta__value {
+          font-size: 32px;
+          line-height: 48px;
+          letter-spacing: 0;
+        }
+
+        .program--compass .program-meta__caption {
+          margin-top: 4px;
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .program--compass .program__media {
+          display: none;
+  }
+@media (max-width: 479px) {
+        .program--compass {
+          padding-right: 16px;
+          padding-left: 16px;
+        }
+
+        .program--compass .program__item {
+          grid-template-columns: 32px 1fr;
+          gap: 20px;
+        }
+  }
+}

@@ -1,0 +1,81 @@
+---
+import { siteConfig } from "@/config/site";
+import MenuButton from "@/components/shared/MenuButton.astro";
+---
+
+<header class="header-shell">
+  <div class="header-shell__inner">
+    <MenuButton id="menuToggle" label="Открыть меню" controls="sideMenu" />
+    <div class="brand-mark brand-mark--header">
+      <img src={siteConfig.brandLogo} width="132" height="40" alt="RMFlow" decoding="async" />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header-shell {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .header-shell__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 56px 0;
+  }
+
+  .brand-mark {
+    pointer-events: auto;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .brand-mark--header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 36px;
+  }
+
+  .brand-mark--header img {
+    display: block;
+    width: 132px;
+    height: auto;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .header-shell__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .header-shell__inner {
+      padding-top: 80px;
+      padding-left: 56px;
+      padding-right: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .header-shell__inner {
+      padding: 24px 24px 0;
+    }
+
+    .brand-mark--header {
+      min-height: 28px;
+    }
+
+    .brand-mark--header img {
+      width: 95px;
+    }
+  }
+</style>

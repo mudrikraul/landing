@@ -1,0 +1,216 @@
+---
+import { siteConfig } from "@/config/site";
+import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
+---
+
+<section class="section section--photo hero" id="hero" data-scroll-section>
+  <div class="section-bg">
+    <img src={siteConfig.heroImage} width="1920" height="1200" alt="RMFlow hero" fetchpriority="high" decoding="async" />
+  </div>
+  <div class="section__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">The way to<br />yourself...</h1>
+    </div>
+    <HeroMobileGallery />
+  </div>
+</section>
+
+<style>
+  .section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-height) + 18px);
+  }
+
+  .section--photo {
+    color: var(--color-white);
+  }
+
+  .section-bg,
+  .section-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .section-bg {
+    overflow: hidden;
+  }
+
+  .section-bg img {
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.03);
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 0;
+    overflow: hidden;
+    background: #131219;
+  }
+
+  .hero .section__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: inherit;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding: 0 56px;
+  }
+
+  .hero .section-bg {
+    background: linear-gradient(180deg, #1a1921 0%, #111116 100%);
+  }
+
+  .hero .section-bg img {
+    top: clamp(44px, 3.5vw, 64px);
+    right: max(0px, calc((100vw - 1440px) / 2));
+    bottom: auto;
+    left: auto;
+    width: clamp(940px, 67vw, 1020px);
+    height: auto;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: right bottom;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 694px);
+    max-width: 694px;
+    padding-top: 191px;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 116px;
+    font-weight: 300;
+    line-height: 124px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .hero .section__inner {
+      padding: 0 40px;
+    }
+
+    .hero .section-bg img {
+      top: auto;
+      right: 0;
+      bottom: -16px;
+      width: clamp(700px, 67vw, 960px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero .section__inner {
+      min-height: auto;
+      padding: 0 32px 40px;
+    }
+
+    .hero .section-bg img {
+      top: 136px;
+      right: -10%;
+      bottom: auto;
+      width: 112%;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      opacity: 1;
+      transform: scale(1.14);
+    }
+
+    .hero .section-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.24) 0%, #000000 100%);
+    }
+
+    .hero__content {
+      max-width: 460px;
+      padding-top: 250px;
+    }
+
+    .hero__title {
+      font-size: 72px;
+      line-height: 84px;
+      letter-spacing: -0.02em;
+    }
+
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero .section__inner {
+      min-height: auto;
+      padding: 0 24px 36px;
+    }
+
+    .hero .section-bg img {
+      top: 184px;
+      right: auto;
+      bottom: auto;
+      left: 2%;
+      width: 118%;
+      height: auto;
+      max-width: none;
+      opacity: 1;
+      transform: scale(1.35);
+    }
+
+    .hero__content {
+      max-width: 288px;
+      padding-top: 320px;
+    }
+
+    .hero__title {
+      font-size: 48px;
+      line-height: 60px;
+      letter-spacing: -0.02em;
+    }
+
+  }
+
+  @media (max-width: 479px) {
+    .hero .section__inner {
+      padding-right: 12px;
+      padding-left: 24px;
+    }
+
+    .hero .section-bg img {
+      right: -18%;
+      left: auto;
+      width: 128%;
+    }
+
+    .hero__content {
+      max-width: 288px;
+    }
+
+    .hero__title {
+      font-size: 48px;
+      line-height: 60px;
+    }
+
+  }
+</style>

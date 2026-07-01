@@ -1,0 +1,201 @@
+---
+import MenuButton from "@/components/shared/MenuButton.astro";
+import { navigation, socialLinks } from "@/data/navigation";
+
+const shortLabels = { instagram: "ig", telegram: "tg", youtube: "yt" } as const;
+---
+
+<div class="overlay" id="menuOverlay"></div>
+
+<aside class="side-menu" id="sideMenu" aria-hidden="true">
+  <div class="side-menu__top">
+    <MenuButton id="menuClose" label="Закрыть меню" />
+  </div>
+  <nav class="side-menu__nav" aria-label="Основная навигация">
+    {navigation.map((item) => (
+      <a href={item.href} data-menu-link>
+        <span>{item.label}</span>
+      </a>
+    ))}
+  </nav>
+  <div class="side-menu__spacer"></div>
+  <div class="social-list">
+    {socialLinks.map((link) => (
+      <a
+        class="social-link"
+        href={link.href ?? "#"}
+        target={link.href && link.href !== "#" ? "_blank" : undefined}
+        rel={link.href && link.href !== "#" ? "noreferrer" : undefined}
+      >
+        <span class="social-link__icon">{shortLabels[link.icon]}</span>
+        <span class="social-link__label">{link.label}</span>
+      </a>
+    ))}
+  </div>
+</aside>
+
+<style>
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(4, 4, 5, 0.55);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .side-menu {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 46;
+    display: flex;
+    flex-direction: column;
+    width: min(420px, 100vw);
+    padding: 32px 28px;
+    overflow: hidden;
+    background: rgba(34, 33, 38, 0.42);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(32px);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    isolation: isolate;
+  }
+
+  .side-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .side-menu::before {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.06), transparent 32%),
+      radial-gradient(circle at 78% 82%, rgba(255, 255, 255, 0.03), transparent 28%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    background-size: auto, auto, 160px 160px;
+    pointer-events: none;
+    content: "";
+  }
+
+  .side-menu > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .side-menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 56px;
+  }
+
+  .side-menu__nav {
+    display: grid;
+    gap: 18px;
+  }
+
+  .side-menu__nav a {
+    position: relative;
+    display: inline-flex;
+    width: max-content;
+    color: var(--color-white);
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    transition: color 0.2s ease;
+  }
+
+  .side-menu__nav a::after {
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.2s ease;
+    content: "";
+  }
+
+  .side-menu__nav a:hover,
+  .side-menu__nav a.is-active {
+    color: var(--color-accent);
+  }
+
+  .side-menu__nav a:hover::after,
+  .side-menu__nav a.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .side-menu__spacer {
+    flex: 1;
+  }
+
+  .social-list {
+    display: grid;
+    gap: 26px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .social-link:hover {
+    color: var(--color-white);
+  }
+
+  .social-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .social-link__label {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    text-decoration-color: currentColor;
+  }
+
+  @media (max-width: 767px) {
+    .side-menu {
+      width: 100vw;
+      padding: 24px 20px;
+    }
+
+    .social-list {
+      gap: 0;
+    }
+
+    .social-list .social-link {
+      width: 100%;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .social-list .social-link:last-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+</style>

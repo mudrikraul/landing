@@ -1,0 +1,17 @@
+:root {
+  --color-white: #fff;
+  --color-accent: #ff7d1a;
+  --color-black: #080808;
+  --color-ink: #17161c;
+  --color-muted: #8e8b91;
+  --color-line: rgba(255, 255, 255, 0.2);
+  --surface-dark: #121118;
+  --surface-light: #eeece9;
+  --container-width: 1320px;
+  --header-height: 96px;
+  --section-inline: clamp(20px, 4vw, 56px);
+  --shadow-dialog: 0 32px 80px rgba(0, 0, 0, 0.5);
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Raleway", "Inter", sans-serif;
+}
+

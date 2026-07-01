@@ -1,0 +1,293 @@
+---
+import LeadForm from "./LeadForm.astro";
+---
+
+<dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-title">
+  <button class="lead-dialog__close" type="button" data-close-lead aria-label="Закрыть форму">
+    <span aria-hidden="true"></span>
+  </button>
+
+  <div class="lead-dialog__stage">
+    <div class="lead-dialog__view lead-dialog__view--form" data-lead-view="form">
+      <div class="lead-dialog__card">
+        <h2 id="lead-title">Давайте знакомиться</h2>
+        <p class="lead-dialog__subtitle">Оставьте ваши данные и мы свяжемся с вами в ближайшее время.</p>
+        <LeadForm />
+      </div>
+    </div>
+
+    <div class="lead-dialog__view lead-dialog__view--status" data-lead-view="success" hidden>
+      <div class="lead-dialog__status lead-dialog__status--success">
+        <img
+          class="lead-dialog__status-image"
+          src="https://res.cloudinary.com/dohehigsm/image/upload/v1777399326/success_q5fulg.png"
+          width="275"
+          height="227"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        />
+        <h2>Спасибо! Ваша заявка принята</h2>
+        <p>Мы свяжемся с вами в ближайшее время.</p>
+      </div>
+    </div>
+
+    <div class="lead-dialog__view lead-dialog__view--status" data-lead-view="error" hidden>
+      <div class="lead-dialog__status lead-dialog__status--error">
+        <span class="lead-dialog__status-icon" aria-hidden="true">☹</span>
+        <h2>Что-то пошло не так</h2>
+        <p data-lead-status-message>Попробуйте перезагрузить страницу.</p>
+        <button class="lead-dialog__secondary" type="button" data-lead-retry>Вернуться к форме</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .lead-dialog {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    background-color: rgba(34, 33, 38, 0.92);
+    color: #080808;
+    opacity: 0;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.12));
+    transform: scale(0.985);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .lead-dialog::backdrop {
+    background: transparent;
+  }
+
+  .lead-dialog.is-open {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .lead-dialog.is-closing {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+
+  .lead-dialog__stage {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 96px 32px 72px;
+    place-items: center;
+    overflow: auto;
+  }
+
+  .lead-dialog__close {
+    position: absolute;
+    top: clamp(28px, 8vw, 100px);
+    right: clamp(28px, 8vw, 86px);
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #a8a4a4;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .lead-dialog__close span,
+  .lead-dialog__close span::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    content: "";
+  }
+
+  .lead-dialog__close span {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .lead-dialog__close span::before {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .lead-dialog__close:hover,
+  .lead-dialog__close:focus-visible {
+    color: #ffffff;
+    transform: scale(1.04);
+  }
+
+  .lead-dialog__view {
+    display: grid;
+    width: 100%;
+    place-items: center;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+
+  .lead-dialog__view[hidden] {
+    display: none;
+  }
+
+  .lead-dialog__card {
+    width: min(600px, 100%);
+    padding: 32px;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  h2 {
+    margin: 0;
+    color: #000000;
+    font-family: var(--font-body);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0;
+  }
+
+  .lead-dialog__subtitle {
+    margin: 8px 0 16px;
+    color: #080808;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .lead-dialog__view--status {
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .lead-dialog__status {
+    display: grid;
+    width: min(536px, 100%);
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .lead-dialog__status h2 {
+    color: #ffffff;
+  }
+
+  .lead-dialog__status p {
+    max-width: 536px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .lead-dialog__status-image {
+    display: block;
+    width: min(275px, 100%);
+    height: auto;
+  }
+
+  .lead-dialog__status-icon {
+    display: grid;
+    width: 120px;
+    height: 120px;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 72px;
+    line-height: 1;
+  }
+
+  .lead-dialog__status--error .lead-dialog__status-icon {
+    background: transparent;
+    color: #ffffff;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", var(--font-body);
+    font-size: 96px;
+  }
+
+  .lead-dialog__secondary {
+    min-height: 48px;
+    padding: 12px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .lead-dialog__secondary:hover,
+  .lead-dialog__secondary:focus-visible {
+    border-color: var(--color-accent);
+    background: rgba(255, 125, 26, 0.12);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 767px) {
+    .lead-dialog__stage {
+      padding: 76px 16px 40px;
+    }
+
+    .lead-dialog__close {
+      top: 24px;
+      right: 24px;
+    }
+
+    .lead-dialog__card {
+      width: min(100%, 600px);
+      padding: 24px;
+      border-radius: 22px;
+    }
+
+    h2 {
+      font-size: 26px;
+      line-height: 31px;
+    }
+
+    .lead-dialog__subtitle,
+    .lead-dialog__status p {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .lead-dialog__status-icon {
+      width: 96px;
+      height: 96px;
+    }
+  }
+
+  @media (max-width: 389px) {
+    .lead-dialog__stage {
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+
+    .lead-dialog__card {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 29px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lead-dialog,
+    .lead-dialog__view,
+    .lead-dialog__close,
+    .lead-dialog__secondary {
+      transition: none;
+    }
+  }
+</style>

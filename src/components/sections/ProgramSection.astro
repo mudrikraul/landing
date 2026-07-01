@@ -1,0 +1,12 @@
+---
+import type { Program } from "@/types/site";
+import ProgramCard from "@/components/programs/ProgramCard.astro";
+
+interface Props {
+  program: Program;
+}
+
+const { program } = Astro.props;
+---
+
+<ProgramCard program={program} />

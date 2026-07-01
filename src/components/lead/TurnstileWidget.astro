@@ -1,0 +1,27 @@
+---
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+---
+
+<div class="turnstile-widget" data-turnstile-container data-turnstile-site-key={siteKey}>
+  <p>Загрузка проверки безопасности...</p>
+</div>
+
+<style>
+  .turnstile-widget {
+    display: grid;
+    place-items: center;
+    min-height: 65px;
+    overflow: hidden;
+  }
+
+  .turnstile-widget :global(iframe) {
+    max-width: 100%;
+  }
+
+  p {
+    margin: 0;
+    color: #706c6c;
+    font-size: 12px;
+    line-height: 16px;
+  }
+</style>

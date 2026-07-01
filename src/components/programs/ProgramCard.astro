@@ -1,0 +1,102 @@
+---
+import type { Program } from "@/types/site";
+import giftIcon from "@/assets/gift.svg";
+import { splitBonusText } from "./bonus";
+import "./styles/base.css";
+import "./styles/compass.css";
+import "./styles/productivity.css";
+import "./styles/balance.css";
+import "./styles/strength.css";
+import "./styles/rejuvenation.css";
+
+interface Props {
+  program: Program;
+}
+
+const { program } = Astro.props;
+const resultTitle = program.resultTitle ?? "\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442:";
+const { label: bonusLabel, text: bonusText } = splitBonusText(program.bonus);
+const isStrength = program.variant === "strength";
+const imageDimensions: Record<Program["variant"], { width: number; height: number }> = {
+  compass: { width: 1100, height: 1300 },
+  productivity: { width: 1100, height: 1300 },
+  balance: { width: 1100, height: 1300 },
+  strength: { width: 1680, height: 2194 },
+  rejuvenation: { width: 1440, height: 1024 }
+};
+const { width: imageWidth, height: imageHeight } = imageDimensions[program.variant];
+const imageAlt = program.variant === "rejuvenation"
+  ? [program.accentTitle, program.title].filter(Boolean).join(" ")
+  : program.title;
+---
+
+<section class:list={["program", `program--${program.theme}`, `program--${program.variant}`]} id={program.id} data-scroll-section>
+  <div class="section__inner">
+    <div class="program__shell">
+      <div class="program__content">
+        <div class="program__stack">
+          <h2 class="program__title">
+            {program.accentTitle && program.accentPosition === "before" ? (
+              <>
+                <span class="program__title-accent">{program.accentTitle}</span>
+                <span class="program__title-main">{program.title}</span>
+              </>
+            ) : (
+              <>
+                {program.title}
+                {program.accentTitle && (
+                  <>
+                    <br />
+                    <span>{program.accentTitle}</span>
+                  </>
+                )}
+              </>
+            )}
+          </h2>
+          {program.subtitle && <p class="program__subtitle">{program.subtitle}</p>}
+          {program.intro && <p class="program__intro">{program.intro}</p>}
+          {program.listTitle && <h3 class="program__list-title">{program.listTitle}</h3>}
+          <ul class="program__list">
+            {program.bullets.map((bullet, index) => (
+              <li class="program__item">
+                <span class="program__item-index">{index + 1}</span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+          {program.bonus && (
+            <div class="program__bonus">
+              {isStrength ? (
+                <>
+                  <span class="program__bonus-icon" aria-hidden="true">
+                    <img src={giftIcon.src} width="24" height="24" alt="" loading="lazy" decoding="async" />
+                  </span>
+                  <span>
+                    <span class="program__bonus-label">{bonusLabel}</span>
+                    {bonusText && <> {bonusText}</>}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span aria-hidden="true">&#9678;</span>
+                  <span>{program.bonus}</span>
+                </>
+              )}
+            </div>
+          )}
+          <div class="program__result">
+            <h3>{resultTitle}</h3>
+            <p>{program.result}</p>
+          </div>
+        </div>
+        <div class="program__meta">
+          <div class="program-meta__value">{program.price}</div>
+          <div class="program-meta__caption">{program.duration}</div>
+        </div>
+      </div>
+      <div class="program__media">
+        <img src={program.image} width={imageWidth} height={imageHeight} alt={imageAlt} loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </div>
+</section>

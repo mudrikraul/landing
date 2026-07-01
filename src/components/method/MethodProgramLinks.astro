@@ -1,0 +1,196 @@
+---
+import ArrowIcon from "@/components/shared/ArrowIcon.astro";
+import { methodLinks } from "@/data/navigation";
+
+const mobileLinks = [...methodLinks].sort((a, b) => a.mobileOrder - b.mobileOrder);
+const leftLinks = methodLinks.filter((item) => item.desktopColumn === "left").sort((a, b) => a.desktopRow - b.desktopRow);
+const rightLinks = methodLinks.filter((item) => item.desktopColumn === "right").sort((a, b) => a.desktopRow - b.desktopRow);
+---
+
+<nav class="method__actions" id="methodLinks" aria-label="Method programs">
+  <div class="method__columns method__columns--desktop">
+    <div class="method__column method__column--left">
+      {
+        leftLinks.map((item) => (
+          <a class="method__link" href={item.target}>
+            <span class="method__link-label">{item.label}</span>
+            <ArrowIcon class="method__link-icon" />
+          </a>
+        ))
+      }
+    </div>
+    <div class="method__column-spacer" aria-hidden="true"></div>
+    <div class="method__column method__column--right">
+      {
+        rightLinks.map((item) => (
+          <a class="method__link" href={item.target}>
+            <span class="method__link-label">{item.label}</span>
+            <ArrowIcon class="method__link-icon" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="method__columns method__columns--mobile">
+    <div class="method__column method__column--mobile">
+      {
+        mobileLinks.map((item) => (
+          <a class="method__link" href={item.target}>
+            <span class="method__link-label">{item.label}</span>
+            <ArrowIcon class="method__link-icon" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<style>
+  .method__actions {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: none;
+    margin-top: clamp(112px, 14vw, 188px);
+  }
+
+  .method__columns {
+    display: grid;
+    grid-template-columns: minmax(0, 430px) minmax(48px, 1fr) minmax(0, 397px);
+    align-items: start;
+    width: 100%;
+  }
+
+  .method__columns--mobile {
+    display: none;
+  }
+
+  .method__column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+  }
+
+  .method__column--left {
+    align-items: flex-start;
+  }
+
+  .method__column--right {
+    align-items: flex-end;
+    justify-self: end;
+    width: 100%;
+    padding-top: 64px;
+  }
+
+  .method__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 80px;
+    padding: 24px 40px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.64);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: var(--color-white);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.02em;
+    transition:
+      background-color 0.22s ease,
+      color 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .method__column--left .method__link {
+    max-width: 430px;
+  }
+
+  .method__column--right .method__link {
+    max-width: 397px;
+  }
+
+  .method__link-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .method__link:hover,
+  .method__link:focus-visible {
+    transform: translateY(-2px);
+    background-color: rgba(255, 125, 26, 0.95);
+    color: var(--color-black);
+  }
+
+  :global(.method__link-icon) {
+    display: block;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (max-width: 1024px) {
+    .method__actions {
+      max-width: none;
+      margin-top: 18px;
+    }
+
+    .method__columns {
+      display: block;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .method__columns--desktop {
+      display: none;
+    }
+
+    .method__column {
+      gap: 0;
+    }
+
+    .method__column--right {
+      width: auto;
+      padding-top: 0;
+    }
+
+    .method__link {
+      display: flex;
+      width: 100%;
+      min-height: 80px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0;
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      color: var(--color-white);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.02em;
+      transform: none;
+      transition: color 0.22s ease;
+    }
+
+    .method__link:hover,
+    .method__link:focus-visible,
+    .method__link:active {
+      background: transparent;
+      color: var(--color-accent);
+      transform: none;
+    }
+
+    :global(.method__link-icon) {
+      flex-basis: 18px;
+      width: 18px;
+      height: 24px;
+    }
+  }
+</style>

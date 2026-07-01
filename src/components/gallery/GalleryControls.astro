@@ -1,0 +1,59 @@
+---
+import ArrowIcon from "@/components/shared/ArrowIcon.astro";
+---
+
+<div class="gallery-controls">
+  <button type="button" class="gallery-control" id="galleryPrev" aria-label="РџСЂРµРґС‹РґСѓС‰Р°СЏ РєР°СЂС‚РѕС‡РєР°">
+    <span class="gallery-control__icon-wrap gallery-control__icon-wrap--prev" aria-hidden="true">
+      <ArrowIcon class="gallery-control__icon" />
+    </span>
+  </button>
+  <button type="button" class="gallery-control" id="galleryNext" aria-label="РЎР»РµРґСѓСЋС‰Р°СЏ РєР°СЂС‚РѕС‡РєР°">
+    <span class="gallery-control__icon-wrap" aria-hidden="true">
+      <ArrowIcon class="gallery-control__icon" />
+    </span>
+  </button>
+</div>
+
+<style>
+  .gallery-controls {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  :global(.gallery.has-controls) .gallery-controls {
+    display: flex;
+  }
+
+  .gallery-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    border-radius: 24px;
+    background: rgba(8, 8, 8, 0.68);
+    color: #a8a4a4;
+    cursor: pointer;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .gallery-control:hover,
+  .gallery-control:active {
+    color: var(--color-white);
+  }
+
+  .gallery-control__icon-wrap,
+  :global(.gallery-control__icon) {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+
+  .gallery-control__icon-wrap--prev {
+    transform: rotate(180deg);
+  }
+</style>

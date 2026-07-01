@@ -1,0 +1,8 @@
+---
+import ProgramSection from "./ProgramSection.astro";
+import { programs } from "@/data/programs";
+---
+
+<div class="program-list section" id="programSections">
+  {programs.map((program) => <ProgramSection program={program} />)}
+</div>

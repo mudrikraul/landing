@@ -1,0 +1,242 @@
+---
+import SocialLinks from "@/components/shared/SocialLinks.astro";
+import { siteConfig } from "@/config/site";
+import { socialLinks } from "@/data/navigation";
+---
+
+<footer class="contacts" id="contacts" data-scroll-section>
+  <img class="contacts__background" src={siteConfig.heroImage} width="1920" height="1200" alt="Рауль Мудрик" loading="lazy" decoding="async" />
+  <div class="contacts__content">
+    <h2 class="contacts__title">Контакты</h2>
+    <p class="contacts__tagline">The way to<br />yourself...</p>
+    <SocialLinks links={socialLinks} />
+  </div>
+</footer>
+
+<style>
+  .contacts {
+    position: relative;
+    min-height: max(100svh, 1024px);
+    overflow: hidden;
+    scroll-margin-top: calc(var(--header-height) + 18px);
+    background: #1b1a1f;
+    color: var(--color-white);
+  }
+
+  .contacts__background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .contacts__background {
+    top: clamp(44px, 3.5vw, 64px);
+    right: max(0px, calc((100vw - 1440px) / 2));
+    bottom: auto;
+    left: auto;
+    width: clamp(940px, 67vw, 1020px);
+    height: auto;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: right bottom;
+    opacity: 1;
+  }
+
+  .contacts__content {
+    position: relative;
+    z-index: 2;
+    min-height: max(100svh, 1024px);
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  .contacts__title {
+    position: absolute;
+    top: 69px;
+    left: 180px;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 62px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .contacts__tagline {
+    position: absolute;
+    top: 191px;
+    left: 56px;
+    width: 694px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.52);
+    font-family: var(--font-display);
+    font-size: 116px;
+    font-weight: 300;
+    line-height: 124px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .contacts :global(.social-links) {
+    position: absolute;
+    top: 350px;
+    left: 52px;
+    display: grid;
+    gap: 40px;
+  }
+
+  .contacts :global(.social-links a) {
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: 24px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.03em;
+    text-underline-offset: 0.25em;
+    transition: color 220ms ease;
+  }
+
+  .contacts :global(.social-links a:hover),
+  .contacts :global(.social-links a:focus-visible) {
+    color: var(--color-accent);
+  }
+
+  .contacts :global(.social-links__icon) {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.6);
+    color: #080808;
+    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
+  }
+
+  .contacts :global(.social-links a:hover .social-links__icon),
+  .contacts :global(.social-links a:focus-visible .social-links__icon) {
+    background: var(--color-accent);
+    color: #080808;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .contacts__title {
+      left: clamp(84px, 12.5vw, 180px);
+    }
+
+    .contacts__background {
+      top: auto;
+      right: 0;
+      bottom: -16px;
+      width: clamp(700px, 67vw, 960px);
+    }
+
+    .contacts__tagline {
+      left: 40px;
+      font-size: clamp(82px, 8vw, 116px);
+      line-height: 1.05;
+    }
+
+    .contacts :global(.social-links) {
+      left: 40px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .contacts {
+      min-height: 720px;
+    }
+
+    .contacts__content {
+      min-height: 720px;
+      padding: 0 32px;
+    }
+
+    .contacts__title {
+      left: 130px;
+    }
+
+    .contacts__background {
+      top: 72px;
+      right: -10%;
+      bottom: auto;
+      width: 112%;
+      transform: scale(1.14);
+    }
+
+    .contacts__tagline {
+      top: 146px;
+      left: 52px;
+      width: 694px;
+      font-size: 82px;
+      line-height: 92px;
+    }
+
+    .contacts :global(.social-links) {
+      top: 350px;
+      left: 52px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .contacts {
+      min-height: 163px;
+      overflow: visible;
+      background-color: #030303;
+    }
+
+    .contacts__background,
+    .contacts__title,
+    .contacts__tagline {
+      display: none;
+    }
+
+    .contacts__content {
+      min-height: 163px;
+      width: min(100%, 390px);
+      margin-inline: auto;
+      padding: 0 24px 24px;
+    }
+
+    .contacts :global(.social-links) {
+      position: static;
+      display: grid;
+      gap: 0;
+      width: 100%;
+    }
+
+    .contacts :global(.social-links a) {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+      min-height: 54px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .contacts :global(.social-links a:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .contacts :global(.social-links__icon) {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.68);
+      color: #080808;
+    }
+  }
+
+  @media (max-width: 389px) {
+    .contacts__content {
+      padding-right: 18px;
+      padding-left: 18px;
+    }
+  }
+</style>

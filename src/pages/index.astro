@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SiteHeader from "@/components/layout/SiteHeader.astro";
+import SideMenu from "@/components/layout/SideMenu.astro";
+import FloatingLeadButton from "@/components/layout/FloatingLeadButton.astro";
+import HeroSection from "@/components/sections/HeroSection.astro";
+import GallerySection from "@/components/sections/GallerySection.astro";
+import MethodSection from "@/components/sections/MethodSection.astro";
+import ProgramsSection from "@/components/sections/ProgramsSection.astro";
+import AboutSection from "@/components/sections/AboutSection.astro";
+import TrustSection from "@/components/sections/TrustSection.astro";
+import ContactsSection from "@/components/sections/ContactsSection.astro";
+import MediaDialog from "@/components/gallery/MediaDialog.astro";
+import LeadDialog from "@/components/lead/LeadDialog.astro";
+import { homeSeo } from "@/config/seo";
+---
+
+<BaseLayout seo={homeSeo}>
+  <SiteHeader />
+  <SideMenu />
+  <FloatingLeadButton />
+  <main>
+    <HeroSection />
+    <GallerySection />
+    <MethodSection />
+    <ProgramsSection />
+    <AboutSection />
+    <TrustSection />
+  </main>
+  <ContactsSection />
+  <MediaDialog />
+  <LeadDialog />
+</BaseLayout>
+
+<script>
+  import { initGallery } from "@/features/gallery/gallery-controller";
+  import { initLeadForm } from "@/features/lead/lead-form-controller";
+  import { initSideMenu } from "@/features/navigation/side-menu";
+  import { initScrollSpy } from "@/features/scroll-spy/scroll-spy";
+
+  initSideMenu();
+  initGallery();
+  initLeadForm();
+  initScrollSpy();
+</script>
+

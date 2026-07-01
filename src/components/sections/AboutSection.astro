@@ -1,0 +1,254 @@
+---
+import { siteConfig } from "@/config/site";
+import { aboutFacts } from "@/data/profile";
+
+const mobileAvatar = "https://res.cloudinary.com/dohehigsm/image/upload/v1779823758/small_avatar_indytk.webp";
+---
+
+<section class="about" id="about" data-scroll-section>
+  <div class="about__inner">
+    <h2 class="about__title">ОБО МНЕ</h2>
+    <div class="about__media about__media--desktop" aria-hidden="true">
+      <img src={siteConfig.heroImage} width="1920" height="1200" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="about__media about__media--mobile">
+      <img src={mobileAvatar} width="256" height="256" alt="Рауль Мудрик" loading="lazy" decoding="async" />
+    </div>
+    <div class="about__content">
+      <ul class="about__facts">
+        {aboutFacts.map((fact) => (
+          <li class="about__fact">
+            <span class="about__bullet" aria-hidden="true"></span>
+            <span>{fact}</span>
+          </li>
+        ))}
+      </ul>
+      <a class="about__button" href="#trust">Почему мне доверяют?</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    --about-desktop-height: clamp(800px, 71.111vw, 1024px);
+    position: relative;
+    min-height: var(--about-desktop-height);
+    overflow: hidden;
+    scroll-margin-top: calc(var(--header-height) + 18px);
+    background: #1b1a1f;
+    color: var(--color-white);
+  }
+
+  .about__inner {
+    position: relative;
+    min-height: var(--about-desktop-height);
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .about__title {
+    position: absolute;
+    top: clamp(52px, 4.8vw, 69px);
+    left: clamp(96px, 12.5vw, 180px);
+    z-index: 3;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 62px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .about__media {
+    overflow: hidden;
+  }
+
+  .about__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about__media--desktop {
+    position: absolute;
+    bottom: 0;
+    left: clamp(-20px, -1.4vw, 0px);
+    z-index: 1;
+    width: clamp(562px, 54.86vw, 790px);
+    height: clamp(620px, 60.42vw, 870px);
+  }
+
+  .about__media--desktop img {
+    object-position: 17% 54%;
+    transform: none;
+    transform-origin: left bottom;
+  }
+
+  .about__media--mobile {
+    display: none;
+  }
+
+  .about__content {
+    position: absolute;
+    top: clamp(188px, 16.67vw, 240px);
+    right: clamp(40px, 4.45vw, 64px);
+    left: clamp(553px, 54vw, 777px);
+    z-index: 2;
+    width: auto;
+    max-width: 480px;
+  }
+
+  .about__facts {
+    display: grid;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about__fact {
+    display: grid;
+    grid-template-columns: 12px 1fr;
+    gap: 12px;
+    align-items: start;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .about__bullet {
+    width: 12px;
+    height: 12px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .about__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 64px;
+    margin-top: 38px;
+    border: 1px solid #ffffff;
+    border-radius: 64px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .about__button:hover,
+  .about__button:focus-visible {
+    border-color: #ff7d1a;
+    background-color: #ff7d1a;
+    color: #080808;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .about__inner {
+      max-width: 100%;
+    }
+
+    .about__content {
+      right: 190px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .about {
+      min-height: auto;
+      background: var(--color-black);
+    }
+
+    .about__inner {
+      display: grid;
+      width: min(100%, 390px);
+      min-height: auto;
+      margin: 0 auto;
+      padding: 41px 24px 24px;
+    }
+
+    .about__title {
+      position: static;
+      color: #ff7d1a;
+      font-size: 56px;
+      line-height: 62px;
+    }
+
+    .about__media--desktop {
+      display: none;
+    }
+
+    .about__media--mobile {
+      display: block;
+      width: min(256px, calc(100vw - 48px));
+      height: min(256px, calc(100vw - 48px));
+      margin: 18px auto 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .about__media--mobile img {
+      object-position: center;
+    }
+
+    .about__content {
+      position: static;
+      width: 100%;
+    }
+
+    .about__facts {
+      gap: 24px;
+    }
+
+    .about__fact {
+      grid-template-columns: 12px 1fr;
+      gap: 12px;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    .about__bullet {
+      margin-top: 5px;
+    }
+
+    .about__button {
+      width: 100%;
+      min-height: 60px;
+      margin-top: 32px;
+      padding: 17px 32px;
+      border-color: #ff7d1a;
+      background: rgba(255, 125, 26, 0.08);
+      color: #ff7d1a;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .about__title {
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 60px;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  @media (max-width: 359px) {
+    .about__inner {
+      padding-right: 18px;
+      padding-left: 18px;
+    }
+
+    .about__media--mobile {
+      width: min(256px, calc(100vw - 36px));
+      height: min(256px, calc(100vw - 36px));
+    }
+  }
+</style>

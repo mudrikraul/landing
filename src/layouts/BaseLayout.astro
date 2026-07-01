@@ -1,0 +1,56 @@
+---
+import type { SeoConfig } from "@/types/site";
+import { getSiteUrl, siteConfig } from "@/config/site";
+import "@/styles/global.css";
+
+interface Props {
+  seo: SeoConfig;
+}
+
+const { seo } = Astro.props;
+const siteUrl = getSiteUrl();
+const canonicalUrl = new URL(seo.canonicalPath, siteUrl);
+const imageUrl = seo.image ? new URL(seo.image, siteUrl) : undefined;
+const robots = seo.noindex ? "noindex, nofollow" : "index, follow";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteUrl.href,
+  description: siteConfig.description,
+  inLanguage: "ru"
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#121118" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta name="twitter:card" content={imageUrl ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    <title>{seo.title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+  <body>
+    <div class="page-shell">
+      <slot />
+    </div>
+  </body>
+</html>

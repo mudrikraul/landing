@@ -1,0 +1,301 @@
+---
+import { certificates, trustBenefits, trustCopy } from "@/data/profile";
+
+const benefitIconShapes = ["circle", "diamond", "square", "wedge"] as const;
+const approachBody = trustCopy.slice(0, -1).join(" ");
+const approachAccent = trustCopy[trustCopy.length - 1];
+---
+
+<section class="trust content-section" id="trust" data-scroll-section>
+  <div class="section-inner trust__shell">
+    <div class="trust__certificates" aria-label="Сертификаты">
+      {certificates.map((certificate) => (
+        <article class="certificate-card">
+          <img src={certificate.image} width="680" height="522" alt={certificate.title} loading="lazy" decoding="async" />
+        </article>
+      ))}
+    </div>
+
+    <div class="trust__content">
+      <div class="trust-block trust-block--benefits">
+        <h2>Что Вы получите в работе со мной?</h2>
+        <ul class="trust-list">
+          {trustBenefits.map((benefit, index) => (
+            <li class="trust-list__item">
+              <span class:list={["trust-list__shape", `trust-list__shape--${benefitIconShapes[index]}`]} aria-hidden="true"></span>
+              <span class="trust-list__text"><strong>{benefit.title}:</strong> {benefit.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="trust-block trust-block--approach">
+        <h2>Мой подход</h2>
+        <div class="trust__copy">
+          <p>{approachBody}</p>
+          <p class="trust__accent">{approachAccent}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust {
+    overflow: hidden;
+    background: #1b1a1f;
+    color: var(--color-white);
+  }
+
+  .trust__shell {
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) minmax(0, 775px);
+    gap: clamp(60px, 8vw, 120px);
+    align-items: start;
+    justify-content: center;
+  }
+
+  .trust__certificates {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .certificate-card {
+    overflow: hidden;
+    aspect-ratio: 340 / 261;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.14),
+      0 18px 44px rgba(0, 0, 0, 0.2);
+  }
+
+  .trust__certificates img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .trust__content {
+    position: relative;
+    display: grid;
+    gap: 64px;
+    width: 100%;
+    padding-top: 42px;
+  }
+
+  .trust__content::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.12) 10%, rgba(255, 255, 255, 0.12) 88%, transparent);
+    content: "";
+  }
+
+  .trust-block {
+    width: 100%;
+  }
+
+  h2 {
+    margin: 0 0 22px;
+    font-family: var(--font-body);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0;
+  }
+
+  .trust-list {
+    display: grid;
+    gap: 17px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trust-list__item {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .trust-list__shape {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    flex: 0 0 auto;
+    background: #a8a4a4;
+  }
+
+  .trust-list__shape--circle {
+    border-radius: 50%;
+  }
+
+  .trust-list__shape--diamond {
+    border-radius: 4px;
+    transform: rotate(45deg) scale(0.92);
+  }
+
+  .trust-list__shape--square {
+    border-radius: 3px;
+  }
+
+  .trust-list__shape--wedge {
+    border-radius: 4px 4px 4px 0;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  .trust-list__text {
+    min-width: 0;
+  }
+
+  .trust-list__text strong {
+    color: #a8a4a4;
+    font-weight: 700;
+  }
+
+  .trust__copy {
+    display: grid;
+    gap: 24px;
+  }
+
+  .trust__copy p {
+    max-width: 775px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .trust__copy p.trust__accent {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 1279px) {
+    .trust__shell {
+      grid-template-columns: 1fr;
+      width: min(100%, 760px);
+      gap: 40px;
+    }
+
+    .trust__certificates {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: none;
+    }
+
+    .trust__content {
+      padding-top: 0;
+    }
+
+    .trust__content::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .trust {
+      padding: 0;
+    }
+
+    .trust__shell {
+      display: block;
+      width: min(100%, 390px);
+      margin-inline: auto;
+    }
+
+    .trust__certificates {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(17, 71, 56, 0.34), transparent 36%),
+        linear-gradient(90deg, #020504 0%, #07130f 55%, #06100d 100%);
+      border-bottom-right-radius: 18px;
+      border-bottom-left-radius: 18px;
+    }
+
+    .certificate-card {
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.26);
+    }
+
+    .trust__content {
+      gap: 46px;
+      padding: 24px 24px 30px;
+      background-color: #030303;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-position: -2px -2px;
+      background-size: 24px 24px;
+    }
+
+    .trust-block--benefits {
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: 30px;
+      line-height: 40px;
+    }
+
+    .trust-list {
+      gap: 20px;
+    }
+
+    .trust-list__item {
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 12px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .trust-list__shape {
+      width: 19px;
+      height: 19px;
+      margin-top: 3px;
+      background: var(--color-accent);
+    }
+
+    .trust-list__shape--diamond {
+      border-radius: 3px;
+    }
+
+    .trust-list__text strong {
+      color: var(--color-accent);
+    }
+
+    .trust__copy {
+      gap: 24px;
+    }
+
+    .trust__copy p {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  @media (max-width: 389px) {
+    .trust__certificates,
+    .trust__content {
+      padding-right: 18px;
+      padding-left: 18px;
+    }
+
+    h2 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+</style>

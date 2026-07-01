@@ -1,0 +1,183 @@
+---
+import { siteConfig } from "@/config/site";
+import MethodProgramLinks from "@/components/method/MethodProgramLinks.astro";
+---
+
+<section class="section method" id="method" data-scroll-section>
+  <div class="section-bg">
+    <img src={siteConfig.methodImage} width="1920" height="1200" alt="What I do" loading="lazy" decoding="async" />
+  </div>
+  <div class="section__inner">
+    <div class="method__grid">
+      <div class="method__copy">
+        <h2 class="section-title">WHAT I DO</h2>
+        <p class="section-copy">
+          Elevate your body and make your mark in history.
+          <br />
+          <strong>&#1059;&#1085;&#1080;&#1082;&#1072;&#1083;&#1100;&#1085;&#1072;&#1103; &#1072;&#1074;&#1090;&#1086;&#1088;&#1089;&#1082;&#1072;&#1103; &#1084;&#1077;&#1090;&#1086;&#1076;&#1080;&#1082;&#1072;</strong>
+        </p>
+      </div>
+      <MethodProgramLinks />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-height) + 18px);
+  }
+
+  .section-bg,
+  .section-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .section-bg {
+    overflow: hidden;
+  }
+
+  .section-bg img {
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.03);
+  }
+
+  .method {
+    min-height: 100svh;
+    padding: 0;
+    overflow: hidden;
+    background: #dedee0;
+    color: var(--color-black);
+  }
+
+  .method .section-bg img {
+    object-position: center 18%;
+    transform: none;
+  }
+
+  .method .section__inner {
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    min-height: inherit;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  .method__grid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 1920px);
+    min-height: 100svh;
+    margin-inline: auto;
+    padding: 69px clamp(40px, 4.9vw, 70px) 64px;
+    box-sizing: border-box;
+  }
+
+  .method__copy {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: auto minmax(280px, 360px);
+    align-items: flex-start;
+    gap: 42px;
+    width: fit-content;
+    margin-left: 0;
+  }
+
+  .method__copy .section-title {
+    margin: 0;
+    color: #082439;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 62px;
+    letter-spacing: -0.01em;
+  }
+
+  .method__copy .section-copy {
+    max-width: 360px;
+    margin: 0;
+    padding-top: 6px;
+    color: rgba(8, 8, 8, 0.6);
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .method__copy .section-copy strong {
+    display: block;
+    margin-top: 0;
+    color: inherit;
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    .method {
+      min-height: auto;
+      padding: 96px 28px 36px;
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    .method .section-bg {
+      display: none;
+    }
+
+    .method .section__inner {
+      max-width: 430px;
+      min-height: auto;
+      margin: 0 auto;
+      padding-inline: 0;
+    }
+
+    .method__grid {
+      min-height: auto;
+      padding: 0;
+    }
+
+    .method__copy {
+      display: block;
+      width: auto;
+      margin-left: 0;
+    }
+
+    .method__copy .section-title {
+      color: var(--color-white);
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 60px;
+      letter-spacing: -0.02em;
+    }
+
+    .method__copy .section-copy {
+      max-width: none;
+      margin-top: 20px;
+      padding-top: 0;
+      color: #a8a4a4;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.01em;
+      white-space: normal;
+    }
+
+    .method__copy .section-copy strong {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+  }
+
+  @media (max-width: 479px) {
+    .method {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+<button class="floating-cta" type="button" data-open-lead aria-haspopup="dialog">
+  <span>хочу<br />обсудить</span>
+</button>
+
+<style>
+  .floating-cta {
+    position: fixed;
+    right: 24px;
+    bottom: max(24px, env(safe-area-inset-bottom));
+    z-index: 48;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    background: rgba(255, 125, 26, 0.04);
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.18);
+    color: var(--color-accent);
+    font-family: "Rubik Mono One", var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .floating-cta:hover,
+  .floating-cta:focus-visible {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 125, 26, 0.8);
+    box-shadow:
+      inset 4px 0 24px rgba(255, 198, 26, 0.8),
+      0 16px 32px rgba(255, 125, 26, 0.16),
+      0 2px 1px rgba(0, 0, 0, 0.12);
+    color: var(--color-white);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  @media (max-width: 767px) {
+    .floating-cta {
+      right: 16px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      width: 108px;
+      height: 108px;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .floating-cta {
+      right: 12px;
+      bottom: max(12px, env(safe-area-inset-bottom));
+    }
+  }
+</style>

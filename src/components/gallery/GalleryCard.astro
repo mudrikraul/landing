@@ -1,0 +1,85 @@
+---
+import type { GalleryItem } from "@/types/site";
+
+interface Props {
+  item: GalleryItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="gallery-card">
+  <button
+    type="button"
+    class="gallery-card__button"
+    data-media-trigger
+    data-media-type={item.type}
+    data-media-url={item.mediaUrl}
+    data-media-title={item.title}
+    aria-label={`РћС‚РєСЂС‹С‚СЊ ${item.title}`}
+  >
+    <span class="gallery-card__media">
+      <img src={item.previewUrl} width="720" height="420" alt={item.title} loading="lazy" decoding="async" />
+    </span>
+    <span class="gallery-card__text">{item.caption || item.title}</span>
+  </button>
+</article>
+
+<style>
+  .gallery-card {
+    flex: 0 0 413px;
+    width: 413px;
+    scroll-snap-align: start;
+  }
+
+  .gallery-card__button {
+    display: grid;
+    gap: 32px;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .gallery-card__media {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .gallery-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+
+  .gallery-card:hover .gallery-card__media img {
+    transform: scale(1.04);
+  }
+
+  .gallery-card__media::after {
+    display: none;
+  }
+
+  .gallery-card__text {
+    display: block;
+    min-height: 84px;
+    color: var(--color-white);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0;
+    transition: color 0.2s ease;
+  }
+
+  .gallery-card__button:hover .gallery-card__text {
+    color: var(--color-accent);
+  }
+</style>

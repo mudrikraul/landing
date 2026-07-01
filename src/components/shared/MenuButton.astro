@@ -1,0 +1,85 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  controls?: string;
+  close?: boolean;
+}
+
+const { id, label, controls } = Astro.props;
+---
+
+<button
+  type="button"
+  class="menu-toggle"
+  id={id}
+  aria-label={label}
+  aria-controls={controls}
+  aria-expanded={controls ? "false" : undefined}
+>
+  <span class="menu-toggle__bars" aria-hidden="true"></span>
+</button>
+
+<style>
+  .menu-toggle {
+    --menu-toggle-width: 56px;
+    --menu-toggle-height: 36px;
+    --menu-toggle-bar-height: 4px;
+    --menu-toggle-bar-offset: 16px;
+    position: relative;
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--menu-toggle-width);
+    height: var(--menu-toggle-height);
+    padding: 0;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle:hover {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .menu-toggle__bars,
+  .menu-toggle__bars::before,
+  .menu-toggle__bars::after {
+    display: block;
+    width: var(--menu-toggle-width);
+    height: var(--menu-toggle-bar-height);
+    border-radius: 999px;
+    background: currentColor;
+    transition: background-color 0.2s ease;
+  }
+
+  .menu-toggle__bars {
+    position: relative;
+  }
+
+  .menu-toggle__bars::before,
+  .menu-toggle__bars::after {
+    position: absolute;
+    left: 0;
+    content: "";
+  }
+
+  .menu-toggle__bars::before {
+    top: calc(var(--menu-toggle-bar-offset) * -1);
+  }
+
+  .menu-toggle__bars::after {
+    top: var(--menu-toggle-bar-offset);
+  }
+
+  @media (max-width: 767px) {
+    .menu-toggle {
+      --menu-toggle-width: 48px;
+      --menu-toggle-height: 30px;
+      --menu-toggle-bar-height: 3px;
+      --menu-toggle-bar-offset: 13px;
+    }
+  }
+</style>

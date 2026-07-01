@@ -1,0 +1,109 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { privacySeo } from "@/config/seo";
+---
+
+<BaseLayout seo={privacySeo}>
+  <main class="privacy">
+    <a class="privacy__back" href="/">← Вернуться на RMFlow</a>
+    <article>
+      <p class="privacy__eyebrow">Временный каркас документа</p>
+      <h1>Политика конфиденциальности</h1>
+      <p class="privacy__warning">
+        Этот документ необходимо заменить утверждённым юридическим текстом до публикации сайта в production.
+      </p>
+
+      <section>
+        <h2>1. Оператор персональных данных</h2>
+        <p>Название и контактные данные оператора должны быть заполнены владельцем сайта до публикации.</p>
+      </section>
+      <section>
+        <h2>2. Какие данные обрабатываются</h2>
+        <p>Форма обратной связи собирает имя и номер телефона, которые пользователь указывает добровольно.</p>
+      </section>
+      <section>
+        <h2>3. Цель обработки</h2>
+        <p>Данные используются только для обработки заявки, обратной связи и обсуждения услуг RMFlow.</p>
+      </section>
+      <section>
+        <h2>4. Передача данных</h2>
+        <p>Заявка передаётся через защищённый серверный обработчик в Telegram. Данные не публикуются на сайте.</p>
+      </section>
+      <section>
+        <h2>5. Срок хранения и отзыв согласия</h2>
+        <p>Срок хранения, порядок удаления данных и контакт для отзыва согласия должны быть определены оператором.</p>
+      </section>
+      <section>
+        <h2>6. Контакт оператора</h2>
+        <p>Контактный email или иной канал для запросов о персональных данных должен быть добавлен до публикации.</p>
+      </section>
+      <p class="privacy__updated">Дата обновления: требуется указать перед публикацией.</p>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy {
+    width: min(100% - 40px, 900px);
+    margin-inline: auto;
+    padding: 48px 0 100px;
+  }
+
+  .privacy__back {
+    display: inline-block;
+    margin-bottom: 68px;
+    color: var(--color-accent);
+    font-size: 0.78rem;
+  }
+
+  article {
+    padding: clamp(26px, 6vw, 70px);
+    background: #17161d;
+  }
+
+  .privacy__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 700px;
+    margin: 18px 0 30px;
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .privacy__warning {
+    padding: 18px;
+    border-left: 3px solid var(--color-accent);
+    background: rgba(255, 125, 26, 0.08);
+  }
+
+  section {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.82rem;
+  }
+
+  .privacy__updated {
+    margin-top: 34px;
+    color: var(--color-muted);
+  }
+</style>
+
