@@ -5,7 +5,10 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
 
 <section class="section section--photo hero" id="hero" data-scroll-section>
   <div class="section-bg">
-    <img src={siteConfig.heroImage} width="1920" height="1200" alt="RMFlow hero" fetchpriority="high" decoding="async" />
+    <picture>
+      <source srcset={siteConfig.heroDesktopImage} media="(min-width: 1025px)" />
+      <img src={siteConfig.heroImage} width="1920" height="1200" alt="RMFlow hero" fetchpriority="high" decoding="async" />
+    </picture>
   </div>
   <div class="section__inner">
     <div class="hero__content">
@@ -26,6 +29,7 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
   }
 
   .section-bg,
+  .section-bg picture,
   .section-bg img {
     position: absolute;
     inset: 0;
@@ -40,7 +44,7 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
   .section-bg img {
     object-fit: cover;
     object-position: center;
-    transform: scale(1.03);
+    transform: none;
   }
 
   .hero {
@@ -64,22 +68,6 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
 
   .hero .section-bg {
     background: linear-gradient(180deg, #1a1921 0%, #111116 100%);
-  }
-
-  .hero .section-bg img {
-    top: clamp(44px, 3.5vw, 64px);
-    right: max(0px, calc((100vw - 1440px) / 2));
-    bottom: auto;
-    left: auto;
-    width: clamp(940px, 67vw, 1020px);
-    height: auto;
-    max-width: none;
-    max-height: none;
-    object-fit: contain;
-    object-position: right bottom;
-    filter: none;
-    opacity: 1;
-    transform: none;
   }
 
   .hero__content {
@@ -106,12 +94,6 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
       padding: 0 40px;
     }
 
-    .hero .section-bg img {
-      top: auto;
-      right: 0;
-      bottom: -16px;
-      width: clamp(700px, 67vw, 960px);
-    }
   }
 
   @media (max-width: 1024px) {

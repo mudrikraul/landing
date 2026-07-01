@@ -8,6 +8,8 @@ export const siteConfig = {
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399769/RMFlow_fzv04u.png",
   heroImage:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399349/hero_ocbvjl.png",
+  heroDesktopImage:
+    "https://res.cloudinary.com/dohehigsm/image/upload/v1782910689/Contacts_vbrahh.png",
   galleryBackground:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399348/gallery_background_yqrdgw.png",
   methodImage:
