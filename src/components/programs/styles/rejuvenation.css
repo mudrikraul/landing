@@ -26,7 +26,7 @@
   .program--rejuvenation .program__content {
     position: absolute;
     top: 132px;
-    left: 64px;
+    left: max(56px, calc((100% - 1440px) / 2 + 56px));
     z-index: 3;
     display: block;
     width: min(670px, 52vw);
@@ -157,6 +157,12 @@
     max-width: none;
     object-fit: cover;
     object-position: center top;
+  }
+
+@media (min-width: 1025px) and (max-width: 1439px) {
+        .program--rejuvenation .program__content {
+          left: 40px;
+        }
   }
 
 @media (max-width: 1024px) {

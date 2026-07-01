@@ -72,7 +72,7 @@ import MethodProgramLinks from "@/components/method/MethodProgramLinks.astro";
     position: relative;
     display: flex;
     flex-direction: column;
-    width: min(100%, 1920px);
+    width: min(100%, 1440px);
     min-height: 100svh;
     margin-inline: auto;
     padding: 69px 56px 64px;
@@ -116,6 +116,13 @@ import MethodProgramLinks from "@/components/method/MethodProgramLinks.astro";
     margin-top: 0;
     color: inherit;
     font-weight: 400;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .method__grid {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
   }
 
   @media (max-width: 1024px) {

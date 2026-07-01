@@ -26,7 +26,7 @@
   .program--productivity .program__content {
     position: absolute;
     top: 170px;
-    left: 56px;
+    left: max(56px, calc((100% - 1440px) / 2 + 56px));
     z-index: 3;
     display: block;
     width: 748px;
@@ -158,7 +158,7 @@
 
         .program--productivity .program__content {
           top: clamp(96px, 13vw, 150px);
-          left: clamp(40px, 5vw, 56px);
+          left: 40px;
           width: min(680px, 54vw);
         }
 
@@ -169,6 +169,11 @@
 
         .program--productivity .program__media {
           left: 38vw;
+        }
+  }
+@media (min-width: 1025px) and (max-width: 1439px) {
+        .program--productivity .program__content {
+          left: 40px;
         }
   }
 @media (max-width: 1024px) {

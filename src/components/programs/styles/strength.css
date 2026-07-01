@@ -26,7 +26,7 @@
   .program--strength .program__content {
     position: absolute;
     top: 132px;
-    left: 56px;
+    left: max(56px, calc((100% - 1440px) / 2 + 56px));
     z-index: 3;
     display: block;
     width: 670px;
@@ -204,7 +204,7 @@
 
         .program--strength .program__content {
           top: clamp(96px, 11vw, 132px);
-          left: clamp(40px, 5vw, 56px);
+          left: 40px;
           width: min(670px, 54vw);
         }
 
@@ -220,6 +220,11 @@
         .program--strength .program__result,
         .program--strength .program__meta {
           max-width: min(670px, 52vw);
+        }
+  }
+@media (min-width: 1025px) and (max-width: 1439px) {
+        .program--strength .program__content {
+          left: 40px;
         }
   }
 @media (max-width: 1024px) {

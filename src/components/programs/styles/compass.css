@@ -75,7 +75,7 @@
   .program--compass .program__content {
     position: absolute;
     top: clamp(88px, 11.5vh, 150px);
-    left: clamp(40px, 4.9vw, 70px);
+    left: max(56px, calc((100% - 1440px) / 2 + 56px));
     z-index: 3;
     display: block;
     width: min(522px, 42vw);
@@ -243,7 +243,7 @@
 
         .program--compass .program__content {
           top: clamp(76px, 10.5vh, 104px);
-          left: clamp(40px, 5.4vw, 64px);
+          left: 40px;
           width: min(492px, 43vw);
         }
 
@@ -256,6 +256,11 @@
           top: clamp(0px, 3.8vh, 36px);
           right: clamp(-116px, -6vw, -72px);
           width: clamp(760px, 68vw, 880px);
+        }
+  }
+@media (min-width: 1025px) and (max-width: 1439px) {
+        .program--compass .program__content {
+          left: 40px;
         }
   }
 @media (max-width: 1024px) {

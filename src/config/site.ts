@@ -9,7 +9,7 @@ export const siteConfig = {
   heroImage:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399349/hero_ocbvjl.png",
   heroDesktopImage:
-    "https://res.cloudinary.com/dohehigsm/image/upload/v1782910689/Contacts_vbrahh.png",
+    "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/Hero_block_h3qdaw.png",
   galleryBackground:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399348/gallery_background_yqrdgw.png",
   methodImage:
