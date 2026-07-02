@@ -13,3 +13,4 @@ dist/
 .wrangler-cache
 .wrangler-xdg
 .vscode
+prod.env

@@ -56,7 +56,7 @@ export const programs: readonly Program[] = [
     duration: "Продолжительность одной сессии: 120 минут",
     price: "Курс: 8 сессий",
     image: "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399345/balans_ngmnzy.webp",
-    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/7_e2qd0q.png"
+    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1783014783/3333_loej7n.png"
   },
   {
     id: "strength",
@@ -77,7 +77,7 @@ export const programs: readonly Program[] = [
     duration: "Продолжительность одной сессии: 120 минут",
     price: "Курс: 12 сессий",
     image: "https://res.cloudinary.com/dohehigsm/image/upload/v1777399348/system_p2gwdk.png",
-    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1782914353/Frame_6121_hkki13.png"
+    desktopBackgroundImage: "https://res.cloudinary.com/dohehigsm/image/upload/v1783014234/9_q7pwjy.png"
   },
   {
     id: "rejuvenation",
