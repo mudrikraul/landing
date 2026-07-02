@@ -18,8 +18,8 @@ export async function sendTelegramLead(lead: TelegramLead, token: string, chatId
     timeZone: "Asia/Almaty"
   }).format(new Date());
   const text = [
-    "Новая заявка с RMFlow website",
-    "",
+    "Новая заявка с сайта RMFlow",
+    "---------------------------",
     `Имя: ${lead.name}`,
     `Телефон: ${lead.phone}`,
     `Дата: ${submittedAt}`
