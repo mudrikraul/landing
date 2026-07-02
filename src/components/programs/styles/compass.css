@@ -284,7 +284,14 @@
           min-height: auto;
           padding: 28px 20px;
           border-radius: 24px;
-          background: var(--compass-mobile-background-image) center / cover no-repeat;
+          background-color: #d2d0d3;
+          background-image:
+            var(--program-mobile-noise-image),
+            var(--compass-mobile-background-image),
+            linear-gradient(180deg, #e8e3ea 0%, #d2d0d3 100%);
+          background-position: 0 0, center, center;
+          background-repeat: repeat, no-repeat, no-repeat;
+          background-size: 160px 160px, cover, cover;
         }
 
         .program--compass .program__shell::before,
@@ -388,15 +395,20 @@
         .program--compass .program__media {
           display: none;
   }
+        }
 @media (max-width: 479px) {
         .program--compass {
-          padding-right: 16px;
-          padding-left: 16px;
+          padding: 0 1px 4px;
+        }
+
+        .program--compass .section__inner {
+          width: 100%;
+          max-width: none;
+          margin-inline: 0;
         }
 
         .program--compass .program__item {
           grid-template-columns: 32px 1fr;
-          gap: 20px;
+          gap: 16px;
         }
   }
-}

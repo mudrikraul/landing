@@ -210,7 +210,14 @@
           min-height: auto;
           padding: 28px 20px;
           border-radius: 24px;
-          background: var(--balance-mobile-background-image) center / cover no-repeat;
+          background-color: #d2d0d3;
+          background-image:
+            var(--program-mobile-noise-image),
+            var(--balance-mobile-background-image),
+            linear-gradient(180deg, #e8e3ea 0%, #d2d0d3 100%);
+          background-position: 0 0, center, center;
+          background-repeat: repeat, no-repeat, no-repeat;
+          background-size: 160px 160px, cover, cover;
         }
 
         .program--balance .program__content {
@@ -314,15 +321,20 @@
   }
 @media (max-width: 479px) {
         .program--balance {
-          padding-right: 4px;
-          padding-left: 4px;
+          padding: 0 1px 4px;
         }
 
         .program--balance .section__inner {
-          max-width: 382px;
+          width: 100%;
+          max-width: none;
+          margin-inline: 0;
         }
 
         .program--balance .program__shell {
-          min-height: 758px;
+          min-height: auto;
+        }
+
+        .program--balance .program__item {
+          gap: 16px;
         }
   }

@@ -1,4 +1,5 @@
 .program {
+    --program-mobile-noise-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' fill='%23000000' opacity='0.14'/%3E%3C/svg%3E");
     position: relative;
     min-height: 820px;
     overflow: hidden;
@@ -145,3 +146,123 @@
     background: #111116;
     color: #fff;
   }
+
+@media (min-width: 480px) and (max-width: 1024px) {
+  .program.program--compass,
+  .program.program--productivity,
+  .program.program--balance,
+  .program.program--strength,
+  .program.program--rejuvenation {
+    padding: 0 28px 4px;
+  }
+
+  .program.program--compass .section__inner,
+  .program.program--productivity .section__inner,
+  .program.program--balance .section__inner,
+  .program.program--strength .section__inner,
+  .program.program--rejuvenation .section__inner {
+    width: 100%;
+    max-width: 430px;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .program.program--compass .program__shell,
+  .program.program--productivity .program__shell,
+  .program.program--balance .program__shell,
+  .program.program--strength .program__shell,
+  .program.program--rejuvenation .program__shell {
+    width: 100%;
+    min-height: auto;
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .program.program--compass .program__list,
+  .program.program--productivity .program__list,
+  .program.program--balance .program__list,
+  .program.program--strength .program__list,
+  .program.program--rejuvenation .program__list {
+    gap: 16px;
+  }
+
+  .program.program--compass .program__item,
+  .program.program--productivity .program__item,
+  .program.program--balance .program__item,
+  .program.program--strength .program__item,
+  .program.program--rejuvenation .program__item {
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+  }
+
+  .program.program--compass .program__item-index,
+  .program.program--productivity .program__item-index,
+  .program.program--balance .program__item-index,
+  .program.program--strength .program__item-index,
+  .program.program--rejuvenation .program__item-index {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+}
+
+@media (max-width: 479px) {
+  .program--compass,
+  .program--productivity,
+  .program--balance,
+  .program--strength,
+  .program--rejuvenation {
+    width: 100vw;
+    max-width: none;
+    padding: 0 1px 4px;
+  }
+
+  .program--compass .section__inner,
+  .program--productivity .section__inner,
+  .program--balance .section__inner,
+  .program--strength .section__inner,
+  .program--rejuvenation .section__inner {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding: 0;
+  }
+
+  .program--compass .program__shell,
+  .program--productivity .program__shell,
+  .program--balance .program__shell,
+  .program--strength .program__shell,
+  .program--rejuvenation .program__shell {
+    width: 100%;
+    min-height: auto;
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .program--compass .program__list,
+  .program--productivity .program__list,
+  .program--balance .program__list,
+  .program--strength .program__list,
+  .program--rejuvenation .program__list {
+    gap: 16px;
+  }
+
+  .program--compass .program__item,
+  .program--productivity .program__item,
+  .program--balance .program__item,
+  .program--strength .program__item,
+  .program--rejuvenation .program__item {
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+  }
+
+  .program--compass .program__item-index,
+  .program--productivity .program__item-index,
+  .program--balance .program__item-index,
+  .program--strength .program__item-index,
+  .program--rejuvenation .program__item-index {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+}
