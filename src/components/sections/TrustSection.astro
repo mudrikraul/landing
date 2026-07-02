@@ -35,6 +35,7 @@ const approachAccent = trustCopy[trustCopy.length - 1];
           <p>{approachBody}</p>
           <p class="trust__accent">{approachAccent}</p>
         </div>
+		<div class="trust-block-shadow"></div>
       </div>
     </div>
   </div>
@@ -249,6 +250,16 @@ const approachAccent = trustCopy[trustCopy.length - 1];
       gap: 46px;
       padding: 24px 24px 30px;
     }
+	
+	.trust-block-shadow {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 15px;
+		background-color: #030303;
+		z-index: 50 !important;
+	}
 
     .trust-block::before {
       display: none;
