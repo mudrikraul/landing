@@ -146,6 +146,14 @@ import { socialLinks } from "@/data/navigation";
     color: #080808;
   }
 
+  @media (min-width: 1025px) {
+    .contacts :global(.social-links) {
+      top: 540px;
+      left: 56px;
+      gap: 32px;
+    }
+  }
+
   @media (min-width: 1025px) and (max-width: 1439px) {
     .contacts__title {
       left: clamp(84px, 12.5vw, 180px);
@@ -262,7 +270,7 @@ import { socialLinks } from "@/data/navigation";
       align-items: center;
       width: 100%;
       min-height: 54px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       color: rgba(255, 255, 255, 0.6);
       font-size: 16px;
       line-height: 24px;

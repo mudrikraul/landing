@@ -86,18 +86,21 @@ const approachAccent = trustCopy[trustCopy.length - 1];
     padding-top: 42px;
   }
 
-  .trust__content::before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -40px;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.12) 10%, rgba(255, 255, 255, 0.12) 88%, transparent);
-    content: "";
+  .trust-block {
+    position: relative;
+    width: 100%;
   }
 
-  .trust-block {
-    width: 100%;
+  .trust-block::before {
+    position: absolute;
+    top: -42px;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    content: "";
+    pointer-events: none;
   }
 
   h2 {
@@ -183,7 +186,8 @@ const approachAccent = trustCopy[trustCopy.length - 1];
   @media (max-width: 1279px) {
     .trust__shell {
       grid-template-columns: 1fr;
-      width: min(100%, 760px);
+      width: 100%;
+      max-width: 760px;
       gap: 40px;
     }
 
@@ -193,22 +197,35 @@ const approachAccent = trustCopy[trustCopy.length - 1];
     }
 
     .trust__content {
-      padding-top: 0;
+      width: 100vw;
+      margin-right: calc(50% - 50vw);
+      margin-left: calc(50% - 50vw);
+      padding: 48px 24px 56px;
+      background-color: #030303;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-position: -2px -2px;
+      background-size: 24px 24px;
     }
 
-    .trust__content::before {
-      display: none;
+    .trust-block {
+      width: 100%;
+      max-width: 760px;
+      margin-inline: auto;
     }
   }
 
   @media (max-width: 767px) {
     .trust {
       padding: 0;
+      background: #06110d;
     }
 
     .trust__shell {
       display: block;
-      width: min(100%, 390px);
+      width: 100%;
+      max-width: none;
       margin-inline: auto;
     }
 
@@ -216,10 +233,10 @@ const approachAccent = trustCopy[trustCopy.length - 1];
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      /* width: min(100%, 390px); */
+      margin-inline: auto;
       padding: 24px;
-      background:
-        radial-gradient(circle at 12% 18%, rgba(17, 71, 56, 0.34), transparent 36%),
-        linear-gradient(90deg, #020504 0%, #07130f 55%, #06100d 100%);
+	  background: linear-gradient(180deg, #000000 0%, #06110D 24.52%);
       border-bottom-right-radius: 18px;
       border-bottom-left-radius: 18px;
     }
@@ -231,17 +248,14 @@ const approachAccent = trustCopy[trustCopy.length - 1];
     .trust__content {
       gap: 46px;
       padding: 24px 24px 30px;
-      background-color: #030303;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-      background-position: -2px -2px;
-      background-size: 24px 24px;
+    }
+
+    .trust-block::before {
+      display: none;
     }
 
     .trust-block--benefits {
       padding-bottom: 22px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     h2 {
