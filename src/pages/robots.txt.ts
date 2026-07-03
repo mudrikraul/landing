@@ -8,6 +8,7 @@ export const GET: APIRoute = () => {
   const body = [
     "User-agent: *",
     "Allow: /",
+    "Disallow: /api/",
     `Sitemap: ${new URL("/sitemap.xml", siteUrl).href}`,
     ""
   ].join("\n");
@@ -16,4 +17,3 @@ export const GET: APIRoute = () => {
     headers: { "Content-Type": "text/plain; charset=utf-8" }
   });
 };
-

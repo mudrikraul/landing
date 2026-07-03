@@ -5,7 +5,10 @@ export interface SeoConfig {
   description: string;
   canonicalPath: string;
   image?: string;
+  imageAlt?: string;
   noindex?: boolean;
+  type?: "website" | "article";
+  structuredData?: "home" | "website";
 }
 
 export interface NavItem {

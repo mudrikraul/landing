@@ -10,16 +10,32 @@ interface Props {
 const { seo } = Astro.props;
 const siteUrl = getSiteUrl();
 const canonicalUrl = new URL(seo.canonicalPath, siteUrl);
+canonicalUrl.search = "";
+canonicalUrl.hash = "";
 const imageUrl = seo.image ? new URL(seo.image, siteUrl) : undefined;
+const pageType = seo.type ?? "website";
+const imageAlt = seo.imageAlt ?? `${siteConfig.name} — ${siteConfig.tagline}`;
 const robots = seo.noindex ? "noindex, nofollow" : "index, follow";
-const jsonLd = {
+const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": new URL("#website", siteUrl).href,
   name: siteConfig.name,
   url: siteUrl.href,
   description: siteConfig.description,
-  inLanguage: "ru"
+  inLanguage: "ru-RU"
 };
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": new URL("#person", siteUrl).href,
+  name: siteConfig.personName,
+  url: siteUrl.href,
+  email: siteConfig.email,
+  image: new URL(siteConfig.aboutImage, siteUrl).href,
+  sameAs: siteConfig.sameAs
+};
+const jsonLd = seo.structuredData === "home" ? [websiteSchema, personSchema] : [websiteSchema];
 ---
 
 <!doctype html>
@@ -30,21 +46,25 @@ const jsonLd = {
     <meta name="description" content={seo.description} />
     <meta name="robots" content={robots} />
     <meta name="theme-color" content="#121118" />
-    <link rel="canonical" href={canonicalUrl} />
+    <link rel="canonical" href={canonicalUrl.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={seo.title} />
     <meta property="og:description" content={seo.description} />
-    <meta property="og:url" content={canonicalUrl} />
-    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta property="og:url" content={canonicalUrl.href} />
+    {imageUrl && <meta property="og:image" content={imageUrl.href} />}
+    {imageUrl && <meta property="og:image:secure_url" content={imageUrl.href} />}
+    {imageUrl && <meta property="og:image:alt" content={imageAlt} />}
     <meta name="twitter:card" content={imageUrl ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={seo.title} />
     <meta name="twitter:description" content={seo.description} />
-    {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    <meta name="twitter:url" content={canonicalUrl.href} />
+    {imageUrl && <meta name="twitter:image" content={imageUrl.href} />}
+    {imageUrl && <meta name="twitter:image:alt" content={imageAlt} />}
     <title>{seo.title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>

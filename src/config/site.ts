@@ -1,9 +1,16 @@
 export const siteConfig = {
   name: "RMFlow",
+  personName: "Рауль Мудрик",
   tagline: "The way to yourself...",
   description:
-    "Авторские программы Рауля Мудрика для внутренней опоры, продуктивности, эмоционального баланса и силы.",
-  defaultUrl: "https://example.com",
+    "Авторские программы Рауля Мудрик для внутренней опоры, продуктивности, эмоционального баланса и силы.",
+  defaultUrl: "http://localhost:4321",
+  email: "mudrikraul@gmail.com",
+  sameAs: [
+    "https://t.me/rmflow",
+    "https://www.youtube.com/watch?v=mlY42EZ_NV0&t=1s",
+    "https://www.instagram.com/raulmudrik"
+  ],
   brandLogo:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399769/RMFlow_fzv04u.png",
   heroImage:
@@ -21,7 +28,11 @@ export const siteConfig = {
 } as const;
 
 export function getSiteUrl(): URL {
-  const configuredUrl = import.meta.env.PUBLIC_SITE_URL || siteConfig.defaultUrl;
-  return new URL(configuredUrl);
+  const configuredUrl = import.meta.env.PUBLIC_SITE_URL?.trim() || siteConfig.defaultUrl;
+  const siteUrl = new URL(configuredUrl);
+  siteUrl.pathname = siteUrl.pathname.endsWith("/") ? siteUrl.pathname : `${siteUrl.pathname}/`;
+  siteUrl.search = "";
+  siteUrl.hash = "";
+  return siteUrl;
 }
 
