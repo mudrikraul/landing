@@ -37,8 +37,10 @@ export function initSideMenu(): void {
       const href = link.getAttribute("href");
 
       if (href?.startsWith("#") && href.length > 1) {
-        event.preventDefault();
-        document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (!event.defaultPrevented) {
+          event.preventDefault();
+          document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
 
       closeMenu();

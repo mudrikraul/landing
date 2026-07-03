@@ -73,6 +73,12 @@ a {
   scroll-margin-top: calc(var(--header-height) + 18px);
 }
 
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  body.vertical-scroll-enabled [data-scroll-section][id] {
+    scroll-margin-top: 0;
+  }
+}
+
 dialog {
   max-width: none;
   max-height: none;
