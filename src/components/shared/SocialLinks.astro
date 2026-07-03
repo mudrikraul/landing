@@ -3,12 +3,13 @@ import type { SocialLink } from "@/types/site";
 
 interface Props {
   links: readonly SocialLink[];
+  variant?: "default" | "contact";
 }
 
-const { links } = Astro.props;
+const { links, variant = "default" } = Astro.props;
 ---
 
-<div class="social-links">
+<div class={`social-links social-links--${variant}`}>
   {links.map((link) => {
     const href = link.href ?? "#";
     const isExternal = href !== "#" && !href.startsWith("#");
@@ -75,5 +76,73 @@ const { links } = Astro.props;
     display: block;
     width: 62.5%;
     height: 62.5%;
+  }
+
+  .social-links--contact {
+    gap: 32px;
+  }
+
+  .social-links--contact a {
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: 24px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.03em;
+    text-underline-offset: 0.25em;
+    transition: color 220ms ease;
+  }
+
+  .social-links--contact a:hover,
+  .social-links--contact a:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .social-links--contact .social-links__icon {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.6);
+    color: #080808;
+    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
+  }
+
+  .social-links--contact a:hover .social-links__icon,
+  .social-links--contact a:focus-visible .social-links__icon {
+    background: var(--color-accent);
+    color: #080808;
+  }
+
+  @media (max-width: 767px) {
+    .social-links--contact {
+      gap: 0;
+      width: 100%;
+    }
+
+    .social-links--contact a {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+      min-height: 54px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .social-links--contact a:last-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .social-links--contact .social-links__icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.68);
+      color: #080808;
+    }
   }
 </style>

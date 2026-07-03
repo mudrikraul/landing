@@ -1,8 +1,7 @@
 ---
 import MenuButton from "@/components/shared/MenuButton.astro";
+import SocialLinks from "@/components/shared/SocialLinks.astro";
 import { navigation, socialLinks } from "@/data/navigation";
-
-const shortLabels = { instagram: "ig", telegram: "tg", youtube: "yt" } as const;
 ---
 
 <div class="overlay" id="menuOverlay"></div>
@@ -19,19 +18,7 @@ const shortLabels = { instagram: "ig", telegram: "tg", youtube: "yt" } as const;
     ))}
   </nav>
   <div class="side-menu__spacer"></div>
-  <div class="social-list">
-    {socialLinks.map((link) => (
-      <a
-        class="social-link"
-        href={link.href ?? "#"}
-        target={link.href && link.href !== "#" ? "_blank" : undefined}
-        rel={link.href && link.href !== "#" ? "noreferrer" : undefined}
-      >
-        <span class="social-link__icon">{shortLabels[link.icon]}</span>
-        <span class="social-link__label">{link.label}</span>
-      </a>
-    ))}
-  </div>
+  <SocialLinks links={socialLinks} variant="contact" />
 </aside>
 
 <style>
@@ -140,62 +127,10 @@ const shortLabels = { instagram: "ig", telegram: "tg", youtube: "yt" } as const;
     flex: 1;
   }
 
-  .social-list {
-    display: grid;
-    gap: 26px;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0;
-    color: rgba(255, 255, 255, 0.72);
-  }
-
-  .social-link:hover {
-    color: var(--color-white);
-  }
-
-  .social-link__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .social-link__label {
-    text-decoration-line: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
-    text-decoration-color: currentColor;
-  }
-
   @media (max-width: 767px) {
     .side-menu {
       width: 100vw;
       padding: 24px 20px;
-    }
-
-    .social-list {
-      gap: 0;
-    }
-
-    .social-list .social-link {
-      width: 100%;
-      padding: 18px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .social-list .social-link:last-child {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
   }
 </style>

@@ -13,7 +13,7 @@ import { socialLinks } from "@/data/navigation";
   <div class="contacts__content">
     <h2 class="contacts__title">Контакты</h2>
     <p class="contacts__tagline">The way to<br />yourself...</p>
-    <SocialLinks links={socialLinks} />
+    <SocialLinks links={socialLinks} variant="contact" />
   </div>
 </footer>
 
@@ -105,52 +105,16 @@ import { socialLinks } from "@/data/navigation";
     white-space: nowrap;
   }
 
-  .contacts :global(.social-links) {
+  .contacts :global(.social-links--contact) {
     position: absolute;
     top: 350px;
     left: 56px;
-    display: grid;
-    gap: 40px;
-  }
-
-  .contacts :global(.social-links a) {
-    gap: 16px;
-    color: rgba(255, 255, 255, 0.6);
-    font-family: var(--font-body);
-    font-size: 24px;
-    line-height: 24px;
-    text-decoration-line: underline;
-    text-decoration-color: currentColor;
-    text-decoration-thickness: 0.03em;
-    text-underline-offset: 0.25em;
-    transition: color 220ms ease;
-  }
-
-  .contacts :global(.social-links a:hover),
-  .contacts :global(.social-links a:focus-visible) {
-    color: var(--color-accent);
-  }
-
-  .contacts :global(.social-links__icon) {
-    width: 48px;
-    height: 48px;
-    border: 0;
-    background: rgba(255, 255, 255, 0.6);
-    color: #080808;
-    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
-  }
-
-  .contacts :global(.social-links a:hover .social-links__icon),
-  .contacts :global(.social-links a:focus-visible .social-links__icon) {
-    background: var(--color-accent);
-    color: #080808;
   }
 
   @media (min-width: 1025px) {
-    .contacts :global(.social-links) {
+    .contacts :global(.social-links--contact) {
       top: 540px;
       left: 56px;
-      gap: 32px;
     }
   }
 
@@ -183,7 +147,7 @@ import { socialLinks } from "@/data/navigation";
       line-height: 1.05;
     }
 
-    .contacts :global(.social-links) {
+    .contacts :global(.social-links--contact) {
       left: 40px;
     }
   }
@@ -226,7 +190,7 @@ import { socialLinks } from "@/data/navigation";
       line-height: 92px;
     }
 
-    .contacts :global(.social-links) {
+    .contacts :global(.social-links--contact) {
       top: 350px;
       left: 52px;
     }
@@ -251,40 +215,13 @@ import { socialLinks } from "@/data/navigation";
 
     .contacts__content {
       min-height: 163px;
-	  width: 100%;
+      width: 100%;
       margin-inline: auto;
       padding: 0 24px 24px;
     }
 
-    .contacts :global(.social-links) {
+    .contacts :global(.social-links--contact) {
       position: static;
-      display: grid;
-      gap: 0;
-      width: 100%;
-    }
-
-    .contacts :global(.social-links a) {
-      display: grid;
-      grid-template-columns: 32px minmax(0, 1fr);
-      gap: 16px;
-      align-items: center;
-      width: 100%;
-      min-height: 54px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 16px;
-      line-height: 24px;
-    }
-
-    .contacts :global(.social-links a:last-child) {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .contacts :global(.social-links__icon) {
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.68);
-      color: #080808;
     }
   }
 

@@ -9,9 +9,9 @@ export const navigation: readonly NavItem[] = [
 ];
 
 export const socialLinks: readonly SocialLink[] = [
-  { label: "Instagram", icon: "instagram" },
-  { label: "Telegram", icon: "telegram" },
-  { label: "YouTube", icon: "youtube" }
+  { label: "Instagram", href: "https://www.instagram.com/raulmudrik", icon: "instagram" },
+  { label: "Telegram", href: "https://t.me/rmflow", icon: "telegram" },
+  { label: "YouTube", href: "https://www.youtube.com/watch?v=mlY42EZ_NV0&t=1s", icon: "youtube" }
 ];
 
 export const methodLinks: readonly MethodLink[] = [
@@ -21,4 +21,3 @@ export const methodLinks: readonly MethodLink[] = [
   { label: "Система внутренней силы", target: "#strength", desktopColumn: "right", desktopRow: 1, mobileOrder: 3 },
   { label: "Омоложение организма", target: "#rejuvenation", desktopColumn: "right", desktopRow: 2, mobileOrder: 5 }
 ];
-
