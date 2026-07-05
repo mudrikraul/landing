@@ -5,7 +5,7 @@ export const homeSeo: SeoConfig = {
   title: "RMFlow — The way to yourself",
   description: siteConfig.description,
   canonicalPath: "/",
-  image: siteConfig.heroImage,
+  image: siteConfig.contactsImage,
   imageAlt: "Рауль Мудрик и авторские программы RMFlow",
   type: "website",
   structuredData: "home"
