@@ -47,7 +47,7 @@ const { item } = Astro.props;
     position: relative;
     display: block;
     width: 100%;
-    height: 260px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 0;
     background: rgba(255, 255, 255, 0.08);
@@ -56,11 +56,18 @@ const { item } = Astro.props;
   .gallery-card__media img {
     width: 100%;
     height: 100%;
+    filter: grayscale(1);
     object-fit: cover;
-    transition: transform 0.35s ease;
+    transition: filter 280ms ease, transform 0.35s ease;
   }
 
-  .gallery-card:hover .gallery-card__media img {
+  .gallery-card__button:hover .gallery-card__media img,
+  .gallery-card__button:focus-visible .gallery-card__media img,
+  .gallery-card__button:active .gallery-card__media img {
+    filter: grayscale(0);
+  }
+
+  .gallery-card__button:hover .gallery-card__media img {
     transform: scale(1.04);
   }
 

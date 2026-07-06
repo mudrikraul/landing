@@ -1,3 +1,5 @@
+import { scrollElementToTop } from "@/features/shared/smooth-scroll";
+
 function hasOpenDialog(): boolean {
   return document.querySelector("dialog[open]") !== null;
 }
@@ -39,7 +41,10 @@ export function initSideMenu(): void {
       if (href?.startsWith("#") && href.length > 1) {
         if (!event.defaultPrevented) {
           event.preventDefault();
-          document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          const target = document.querySelector(href);
+          if (target) {
+            scrollElementToTop(target).catch(() => undefined);
+          }
         }
       }
 

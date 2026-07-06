@@ -149,6 +149,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    filter: grayscale(1);
   }
 
   .program--balance .program__media img {
@@ -206,6 +207,7 @@
         }
 
         .program--balance .program__shell {
+          position: relative;
           display: block;
           min-height: auto;
           padding: 28px 20px;
@@ -220,11 +222,23 @@
           background-size: 160px 160px, cover, cover;
         }
 
+        .program--balance .program__shell::before {
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background-image: var(--balance-mobile-background-image);
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          filter: grayscale(1);
+          content: "";
+        }
+
         .program--balance .program__content {
           position: relative;
           top: auto;
           left: auto;
-          z-index: 1;
+          z-index: 2;
           width: 100%;
           min-height: auto;
           padding: 0;

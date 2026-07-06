@@ -23,7 +23,7 @@ export const galleryItems: readonly GalleryItem[] = [
     id: "practice-photo",
     type: "image",
     title: "Практика RMFlow",
-    caption: "Фрагмент практической работы RMFlow.",
+    caption: "Практика китайской чайной церемонии.",
     description: "Атмосфера практической работы.",
     previewUrl: "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399347/card_rbrplb.jpg",
     mediaUrl: "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399347/card_rbrplb.jpg"

@@ -1,6 +1,7 @@
+import { scrollWindowTo } from "@/features/shared/smooth-scroll";
+
 const DESKTOP_QUERY = "(min-width: 1025px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-const TRANSITION_MS = 760;
 const WHEEL_THRESHOLD = 8;
 const EDGE_TOLERANCE = 12;
 const KEY_SCROLL_STEP_RATIO = 0.72;
@@ -44,8 +45,8 @@ export function initVerticalScroll(): void {
   let sections: HTMLElement[] = [];
   let activeIndex = 0;
   let activeId = "";
-  let releaseTimer = 0;
   let animationFrame = 0;
+  let transitionId = 0;
 
   const canEnable = (): boolean => desktopMedia.matches && !reducedMotionMedia.matches;
   const canIntercept = (): boolean => isEnabled && !hasOpenDialog() && !hasEditableFocus();
@@ -113,12 +114,19 @@ export function initVerticalScroll(): void {
     animationFrame = window.requestAnimationFrame(setActiveFromScroll);
   };
 
-  const releaseTransition = (): void => {
-    window.clearTimeout(releaseTimer);
-    releaseTimer = window.setTimeout(() => {
+  const scrollToPosition = (top: number): void => {
+    const currentTransitionId = transitionId + 1;
+    transitionId = currentTransitionId;
+    isTransitioning = true;
+
+    scrollWindowTo(top).finally(() => {
+      if (transitionId !== currentTransitionId) {
+        return;
+      }
+
       isTransitioning = false;
       setActiveFromScroll();
-    }, TRANSITION_MS);
+    });
   };
 
   const scrollToIndex = (index: number): boolean => {
@@ -134,10 +142,8 @@ export function initVerticalScroll(): void {
     }
 
     activeIndex = nextIndex;
-    isTransitioning = true;
     dispatchActiveSection(section);
-    window.scrollTo({ top: getSectionTop(section), behavior: "smooth" });
-    releaseTransition();
+    scrollToPosition(getSectionTop(section));
     return true;
   };
 
@@ -166,8 +172,7 @@ export function initVerticalScroll(): void {
     const step = Math.max(180, window.innerHeight * KEY_SCROLL_STEP_RATIO);
     const nextTop = clamp(window.scrollY + step * direction, sectionTop, sectionEndScrollY);
 
-    window.scrollTo({ top: nextTop, behavior: "smooth" });
-    releaseTransition();
+    scrollToPosition(nextTop);
   };
 
   const handleWheel = (event: WheelEvent): void => {
@@ -243,7 +248,6 @@ export function initVerticalScroll(): void {
     if (isAtBoundary) {
       moveBy(direction);
     } else {
-      isTransitioning = true;
       scrollWithinSection(currentSection, direction);
     }
   };
@@ -282,9 +286,9 @@ export function initVerticalScroll(): void {
   const disable = (): void => {
     isEnabled = false;
     isTransitioning = false;
+    transitionId += 1;
     sections = [];
     activeId = "";
-    window.clearTimeout(releaseTimer);
     document.body.classList.remove("vertical-scroll-enabled");
     document.body.removeAttribute("data-vertical-scroll-enabled");
 
