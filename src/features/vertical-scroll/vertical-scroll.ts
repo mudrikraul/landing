@@ -68,6 +68,17 @@ export function initVerticalScroll(): void {
 
   const getSectionBottom = (section: HTMLElement): number => getSectionTop(section) + section.offsetHeight;
 
+  const getMaxScrollY = (): number => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+  const getSectionTargetTop = (section: HTMLElement): number => {
+    const sectionTop = getSectionTop(section);
+    const sectionBottom = getSectionBottom(section);
+    const bottomFitTop = sectionBottom - window.innerHeight;
+    const targetTop = Math.max(sectionTop, bottomFitTop);
+
+    return clamp(targetTop, 0, getMaxScrollY());
+  };
+
   const getClosestSectionIndex = (): number => {
     if (sections.length === 0) {
       return 0;
@@ -143,7 +154,7 @@ export function initVerticalScroll(): void {
 
     activeIndex = nextIndex;
     dispatchActiveSection(section);
-    scrollToPosition(getSectionTop(section));
+    scrollToPosition(getSectionTargetTop(section));
     return true;
   };
 
@@ -176,12 +187,16 @@ export function initVerticalScroll(): void {
   };
 
   const handleWheel = (event: WheelEvent): void => {
-    if (!canIntercept() || Math.abs(event.deltaY) <= WHEEL_THRESHOLD || Math.abs(event.deltaY) < Math.abs(event.deltaX)) {
+    if (!canIntercept()) {
       return;
     }
 
     if (isTransitioning) {
       event.preventDefault();
+      return;
+    }
+
+    if (Math.abs(event.deltaY) <= WHEEL_THRESHOLD || Math.abs(event.deltaY) < Math.abs(event.deltaX)) {
       return;
     }
 
@@ -252,6 +267,14 @@ export function initVerticalScroll(): void {
     }
   };
 
+  const handleTouchMove = (event: TouchEvent): void => {
+    if (!canIntercept() || !isTransitioning) {
+      return;
+    }
+
+    event.preventDefault();
+  };
+
   const handleAnchorClick = (event: MouseEvent): void => {
     if (!canIntercept() || event.button !== 0 || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
       return;
@@ -308,6 +331,7 @@ export function initVerticalScroll(): void {
 
   window.addEventListener("wheel", handleWheel, { passive: false });
   window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("touchmove", handleTouchMove, { passive: false });
   window.addEventListener("scroll", requestActiveUpdate, { passive: true });
   window.addEventListener("resize", () => {
     if (!isEnabled) {
