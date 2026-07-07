@@ -15,6 +15,8 @@ export const siteConfig = {
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399769/RMFlow_fzv04u.png",
   heroImage:
     "https://res.cloudinary.com/dohehigsm/image/upload/q_auto/f_auto/v1777399349/hero_ocbvjl.png",
+  heroLaptopImage:
+    "https://res.cloudinary.com/dohehigsm/image/upload/v1783423114/010_ffu32r.png",
   heroDesktopImage:
     "https://res.cloudinary.com/dohehigsm/image/upload/v1782914352/Hero_block_h3qdaw.png",
   galleryBackground:
@@ -35,4 +37,3 @@ export function getSiteUrl(): URL {
   siteUrl.hash = "";
   return siteUrl;
 }
-

@@ -6,7 +6,8 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
 <section class="section section--photo hero" id="hero" data-scroll-section>
   <div class="section-bg">
     <picture>
-      <source srcset={siteConfig.heroDesktopImage} media="(min-width: 1025px)" />
+      <source srcset={siteConfig.heroDesktopImage} media="(min-width: 1440px)" />
+      <source srcset={siteConfig.heroLaptopImage} media="(min-width: 1025px)" />
       <img src={siteConfig.heroImage} width="1920" height="1200" alt="RMFlow hero" fetchpriority="high" decoding="async" />
     </picture>
   </div>
@@ -90,8 +91,19 @@ import HeroMobileGallery from "@/components/hero/HeroMobileGallery.astro";
   }
 
   @media (min-width: 1025px) and (max-width: 1439px) {
+    .hero {
+      min-height: 0;
+      height: min(100svh, calc(100vw * 1920 / 3600));
+    }
+
     .hero .section__inner {
+      min-height: 100%;
       padding: 0 40px;
+    }
+
+    .hero .section-bg img {
+      object-fit: contain;
+      object-position: center top;
     }
 
   }
