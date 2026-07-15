@@ -1,0 +1,41 @@
+---
+import LeadExperience from "@/components/lead/LeadExperience.astro";
+import { infoSeo } from "@/config/seo";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout seo={infoSeo}>
+  <main class="info-lead" id="info-lead" aria-labelledby="lead-title">
+    <LeadExperience headingLevel="h1" />
+  </main>
+</BaseLayout>
+
+<script>
+  import { initInlineLeadForm } from "@/features/lead/lead-form-controller";
+
+  initInlineLeadForm();
+</script>
+
+<style>
+  .info-lead {
+    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: clamp(40px, 8vh, 96px) 32px;
+    overflow: auto;
+    background: #000000;
+    place-items: center;
+  }
+
+  @media (max-width: 767px) {
+    .info-lead {
+      padding: 40px 16px;
+    }
+  }
+
+  @media (max-width: 389px) {
+    .info-lead {
+      padding: 28px 12px;
+    }
+  }
+</style>

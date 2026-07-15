@@ -5,13 +5,19 @@ import { loadTurnstile } from "./turnstile-client";
 
 const DIALOG_ANIMATION_MS = 280;
 
-export function initLeadForm(): void {
-  const dialog = document.querySelector<HTMLDialogElement>("#lead-dialog");
-  const form = dialog?.querySelector<HTMLFormElement>("[data-lead-form]");
-  const stage = dialog?.querySelector<HTMLElement>(".lead-dialog__stage");
-  const errorElement = dialog?.querySelector<HTMLElement>("[data-lead-error]");
-  const statusMessage = dialog?.querySelector<HTMLElement>("[data-lead-status-message]");
-  const retryButton = dialog?.querySelector<HTMLButtonElement>("[data-lead-retry]");
+interface LeadFormBinding {
+  abortRequest: () => void;
+  focusName: () => void;
+  initializeTurnstile: () => Promise<void>;
+  prepareForm: () => void;
+  resetAfterClose: () => void;
+}
+
+function bindLeadForm(root: ParentNode): LeadFormBinding | undefined {
+  const form = root.querySelector<HTMLFormElement>("[data-lead-form]");
+  const errorElement = root.querySelector<HTMLElement>("[data-lead-error]");
+  const statusMessage = root.querySelector<HTMLElement>("[data-lead-status-message]");
+  const retryButton = root.querySelector<HTMLButtonElement>("[data-lead-retry]");
   const submitButton = form?.querySelector<HTMLButtonElement>("button[type='submit']");
   const turnstileContainer = form?.querySelector<HTMLElement>("[data-turnstile-container]");
   const nameInput = form?.elements.namedItem("name");
@@ -19,9 +25,7 @@ export function initLeadForm(): void {
   const consentInput = form?.elements.namedItem("consent");
 
   if (
-    !dialog ||
     !form ||
-    !stage ||
     !errorElement ||
     !submitButton ||
     !turnstileContainer ||
@@ -29,18 +33,15 @@ export function initLeadForm(): void {
     !(phoneInput instanceof HTMLInputElement) ||
     !(consentInput instanceof HTMLInputElement)
   ) {
-    return;
+    return undefined;
   }
 
   let turnstileToken = "";
   let widgetId: string | undefined;
   let activeRequest: AbortController | undefined;
-  let opener: HTMLElement | undefined;
-  let closeTimer: number | undefined;
-  let openFrame: number | undefined;
 
   const setView = (name: "form" | "success" | "error"): void => {
-    dialog.querySelectorAll<HTMLElement>("[data-lead-view]").forEach((view) => {
+    root.querySelectorAll<HTMLElement>("[data-lead-view]").forEach((view) => {
       view.hidden = view.dataset.leadView !== name;
     });
   };
@@ -95,52 +96,28 @@ export function initLeadForm(): void {
     }
   };
 
-  const closeDialog = (): void => {
-    if (!dialog.open || dialog.classList.contains("is-closing")) {
-      return;
-    }
-
-    if (openFrame !== undefined) {
-      window.cancelAnimationFrame(openFrame);
-      openFrame = undefined;
-    }
-
-    dialog.classList.remove("is-open");
-    dialog.classList.add("is-closing");
-    window.clearTimeout(closeTimer);
-    closeTimer = window.setTimeout(() => {
-      dialog.close();
-    }, DIALOG_ANIMATION_MS);
-  };
-
-  const open = (trigger: HTMLElement): void => {
-    opener = trigger;
-    window.clearTimeout(closeTimer);
-    if (openFrame !== undefined) {
-      window.cancelAnimationFrame(openFrame);
-      openFrame = undefined;
-    }
-    dialog.classList.remove("is-closing", "is-open");
+  const prepareForm = (): void => {
     setView("form");
     errorElement.textContent = "";
     updateFieldState(nameInput);
     updateFieldState(phoneInput);
     updateSubmitState();
+  };
 
-    if (!dialog.open) {
-      dialog.showModal();
-    }
+  const focusName = (): void => {
+    window.setTimeout(() => nameInput.focus(), 50);
+  };
 
-    openFrame = window.requestAnimationFrame(() => {
-      dialog.classList.add("is-open");
-      openFrame = undefined;
-    });
+  const abortRequest = (): void => {
+    activeRequest?.abort();
+    activeRequest = undefined;
+  };
 
-    document.body.classList.add("is-locked");
-    initializeTurnstile().catch(() => undefined);
-    window.setTimeout(() => {
-      nameInput.focus();
-    }, 50);
+  const resetAfterClose = (): void => {
+    abortRequest();
+    submitButton.disabled = false;
+    submitButton.textContent = "Отправить";
+    updateSubmitState();
   };
 
   [nameInput, phoneInput].forEach((input) => {
@@ -157,46 +134,11 @@ export function initLeadForm(): void {
     errorElement.textContent = "";
   });
 
-  document.querySelectorAll<HTMLElement>("[data-open-lead]").forEach((trigger) => {
-    trigger.addEventListener("click", () => open(trigger));
-  });
-
-  dialog.querySelectorAll<HTMLButtonElement>("[data-close-lead]").forEach((button) => {
-    button.addEventListener("click", closeDialog);
-  });
-
   retryButton?.addEventListener("click", () => {
     setView("form");
     resetTurnstile();
     updateSubmitState();
-    window.setTimeout(() => nameInput.focus(), 50);
-  });
-
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog || event.target === stage) {
-      closeDialog();
-    }
-  });
-
-  dialog.addEventListener("cancel", (event) => {
-    event.preventDefault();
-    closeDialog();
-  });
-
-  dialog.addEventListener("close", () => {
-    activeRequest?.abort();
-    activeRequest = undefined;
-    window.clearTimeout(closeTimer);
-    if (openFrame !== undefined) {
-      window.cancelAnimationFrame(openFrame);
-      openFrame = undefined;
-    }
-    dialog.classList.remove("is-closing", "is-open");
-    document.body.classList.remove("is-locked");
-    submitButton.disabled = false;
-    submitButton.textContent = "Отправить";
-    updateSubmitState();
-    opener?.focus();
+    focusName();
   });
 
   form.addEventListener("submit", async (event) => {
@@ -272,7 +214,112 @@ export function initLeadForm(): void {
     }
   });
 
-  updateFieldState(nameInput);
-  updateFieldState(phoneInput);
-  updateSubmitState();
+  prepareForm();
+
+  return { abortRequest, focusName, initializeTurnstile, prepareForm, resetAfterClose };
+}
+
+export function initLeadForm(): void {
+  const dialog = document.querySelector<HTMLDialogElement>("#lead-dialog");
+  const stage = dialog?.querySelector<HTMLElement>(".lead-dialog__stage");
+
+  if (!dialog || !stage) {
+    return;
+  }
+
+  const binding = bindLeadForm(dialog);
+  if (!binding) {
+    return;
+  }
+
+  let opener: HTMLElement | undefined;
+  let closeTimer: number | undefined;
+  let openFrame: number | undefined;
+
+  const closeDialog = (): void => {
+    if (!dialog.open || dialog.classList.contains("is-closing")) {
+      return;
+    }
+
+    if (openFrame !== undefined) {
+      window.cancelAnimationFrame(openFrame);
+      openFrame = undefined;
+    }
+
+    dialog.classList.remove("is-open");
+    dialog.classList.add("is-closing");
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(() => {
+      dialog.close();
+    }, DIALOG_ANIMATION_MS);
+  };
+
+  const open = (trigger: HTMLElement): void => {
+    opener = trigger;
+    window.clearTimeout(closeTimer);
+    if (openFrame !== undefined) {
+      window.cancelAnimationFrame(openFrame);
+      openFrame = undefined;
+    }
+    dialog.classList.remove("is-closing", "is-open");
+    binding.prepareForm();
+
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+
+    openFrame = window.requestAnimationFrame(() => {
+      dialog.classList.add("is-open");
+      openFrame = undefined;
+    });
+
+    document.body.classList.add("is-locked");
+    binding.initializeTurnstile().catch(() => undefined);
+    binding.focusName();
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-open-lead]").forEach((trigger) => {
+    trigger.addEventListener("click", () => open(trigger));
+  });
+
+  dialog.querySelectorAll<HTMLButtonElement>("[data-close-lead]").forEach((button) => {
+    button.addEventListener("click", closeDialog);
+  });
+
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog || event.target === stage) {
+      closeDialog();
+    }
+  });
+
+  dialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog();
+  });
+
+  dialog.addEventListener("close", () => {
+    window.clearTimeout(closeTimer);
+    if (openFrame !== undefined) {
+      window.cancelAnimationFrame(openFrame);
+      openFrame = undefined;
+    }
+    dialog.classList.remove("is-closing", "is-open");
+    document.body.classList.remove("is-locked");
+    binding.resetAfterClose();
+    opener?.focus();
+  });
+}
+
+export function initInlineLeadForm(): void {
+  const root = document.querySelector<HTMLElement>("#info-lead");
+  if (!root) {
+    return;
+  }
+
+  const binding = bindLeadForm(root);
+  if (!binding) {
+    return;
+  }
+
+  binding.initializeTurnstile().catch(() => undefined);
 }

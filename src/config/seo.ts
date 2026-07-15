@@ -19,6 +19,15 @@ export const privacySeo: SeoConfig = {
   structuredData: "website"
 };
 
+export const infoSeo: SeoConfig = {
+  title: "Оставить заявку — RMFlow",
+  description: "Оставьте контактные данные, и команда RMFlow свяжется с вами в ближайшее время.",
+  canonicalPath: "/info/",
+  noindex: true,
+  type: "website",
+  structuredData: "website"
+};
+
 export const seoRoutes = [
   { seo: homeSeo, changeFrequency: "monthly", priority: 1 },
   { seo: privacySeo, changeFrequency: "yearly", priority: 0.2 }
